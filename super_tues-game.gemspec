@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = SuperTues::Game::VERSION
   spec.authors       = ["John House"]
   spec.email         = ["jonlhouse@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{SuperTues e-Boardgame Game Logic}
+  spec.description   = %q{Contains the classes and logic to play Super Tuesday.}
   spec.homepage      = ""
   spec.license       = "MIT"
 

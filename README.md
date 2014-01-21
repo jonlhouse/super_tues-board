@@ -1,6 +1,6 @@
 # SuperTues::Game
 
-TODO: Write a gem description
+SuperTues is a board game created by Peder Lindberg (rights reserved and used here with permission).  This gem contains the "game logic" as a series of plain-old ruby objects. 
 
 ## Installation
 
@@ -18,7 +18,29 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Create a new SuperTues game with the following:
+
+```ruby
+	game = SuperTues::Game.new
+```
+
+An "in-progress" game can be started by passing a GameState object during initialization:
+
+```ruby
+	game = SuperTues::Game.new(GameState.load(...))
+```
+
+Players can be added to the game using:
+
+```ruby
+	player = game.add_player('player_name', SuperTues::Candidate.new("Sen. Barnes"))
+```
+
+Advance the game when a player takes a turn:
+
+```ruby
+	player_updates = game.player_turn(player.actions)
+```
 
 ## Contributing
 
