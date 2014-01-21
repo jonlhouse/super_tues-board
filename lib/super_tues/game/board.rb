@@ -1,8 +1,17 @@
 module SuperTues
-	module Game
+  module Game
 
-		class Board
-		end
+    class Board
+      attr_accessor :players
 
-	end
+      def initialize()
+        self.players = []
+      end
+
+      def add_players(*player_names)
+        players.concat player_names.map{ |name| Player.new(name, self) }
+      end
+    end
+
+  end
 end
