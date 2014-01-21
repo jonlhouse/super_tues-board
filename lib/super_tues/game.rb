@@ -1,4 +1,5 @@
 require "super_tues/game/version"
+require "super_tues/game/board"
 
 module SuperTues
   module Game
