@@ -21,19 +21,19 @@ Or install it yourself as:
 Create a new SuperTues game with the following:
 
 ```ruby
-	game = SuperTues::Game.new
+	game = Board.new
 ```
 
 An "in-progress" game can be started by passing a GameState object during initialization:
 
 ```ruby
-	game = SuperTues::Game.new(GameState.load(...))
+	game = Board.new(GameState.load(...))
 ```
 
 Players can be added to the game using:
 
 ```ruby
-	player = game.add_player('player_name', SuperTues::Candidate.new("Sen. Barnes"))
+	player = game.add_player('player_name', Candidate.new("Sen. Barnes"))
 ```
 
 Advance the game when a player takes a turn:
