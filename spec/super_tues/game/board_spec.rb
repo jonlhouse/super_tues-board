@@ -14,6 +14,14 @@ module SuperTues
           specify { candidates.should_not be_empty }
           specify { candidates.each { |c| c.should be_a Candidate }}
         end
+
+        describe "states" do
+          # new game state for the state bins
+          specify { board.states.length.should == 51 }  # 50 states + DC
+          specify { board.states.each { |state| state.picks.empty?.should be_true } }
+          specify { board.states.each { |state| state.electoral_votes.should > 0 } }
+          specify { board.states.each { |state| state.sway.should be_within(4).of(0) } }
+        end
       end
 
       describe "setup" do
