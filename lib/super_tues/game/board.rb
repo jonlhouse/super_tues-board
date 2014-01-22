@@ -2,12 +2,14 @@ module SuperTues
   module Game
 
     class Board
-      attr_reader :players, :candidates
+      attr_reader :players, :candidates, :states
 
       def initialize()
         @players = []
         @candidates = []
-        add_candidates
+        @states = []
+        init_candidates
+        init_states
       end
 
       def add_players(*player_names)
@@ -28,9 +30,15 @@ module SuperTues
 
     private     
 
-      def add_candidates
+      def init_candidates
         SuperTues::Game::load_candidates_yaml.each do |candidate_hash|
           candidates << Candidate.new(candidate_hash)
+        end
+      end
+
+      def init_states
+        SuperTues::Game::load_states_yaml.each do |state_hash|
+          states << State.new(state_hash)
         end
       end
     end

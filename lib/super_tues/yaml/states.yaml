@@ -1,0 +1,255 @@
+-
+  name: 'Iowa'
+  abbr: 'IA'
+  electoral_votes: 7
+  sway: 0
+-
+  name: 'Nevada'
+  abbr: 'NV'
+  electoral_votes: 5
+  sway: 0
+-
+  name: 'New Hampshire'
+  abbr: 'NH'
+  electoral_votes: 4
+  sway: 0
+- 
+  name: 'South Carolina'
+  abbr: 'SC'
+  electoral_votes: 8
+  sway: 2
+-
+  name: 'Florida'
+  abbr: 'FL'
+  electoral_votes: 27
+  sway: 0
+-
+  name: 'Alabama'
+  abbr: 'AL'
+  electoral_votes: 9
+  sway: 3
+-
+  name: 'Arizona'
+  abbr: 'AZ'
+  electoral_votes: 10
+  sway: 1
+-
+  name: 'Arkansas'
+  abbr: 'AR'
+  electoral_votes: 6
+  sway: 1
+-
+  name: 'Utah'
+  abbr: 'UT'
+  electoral_votes: 5
+  sway: 1
+-
+  name: 'Alaska'
+  abbr: 'AK'
+  electoral_votes: 3
+  sway: 1
+-
+  name: 'Maine'
+  abbr: 'ME'
+  electoral_votes: 4
+  sway: -2
+-
+  name: 'District of Columbia'
+  abbr: 'DC'
+  electoral_votes: 4
+  sway: -2
+-
+  name: 'Louisiana'
+  abbr: 'LA'
+  electoral_votes: 9
+  sway: 1
+-
+  name: 'Tennessee'
+  abbr: 'TN'
+  electoral_votes: 11
+  sway: 1
+-
+  name: 'Virginia'
+  abbr: 'VA'
+  electoral_votes: 13
+  sway: 1
+-
+  name: 'Illinois'
+  abbr: 'IL'
+  electoral_votes: 21
+  sway: -1
+-
+  name: 'Delaware'
+  abbr: 'DE'
+  electoral_votes: 3
+  sway: -3
+-
+  name: 'Indiana'
+  abbr: 'IN'
+  electoral_votes: 11
+  sway: 1
+-
+  name: 'Missouri'
+  abbr: 'MO'
+  electoral_votes: 11
+  sway: 1
+-
+  name: 'New Mexico'
+  abbr: 'NM'
+  electoral_votes: 5
+  sway: 0
+-
+  name: 'North Carolina'
+  abbr: 'NC'
+  electoral_votes: 15
+  sway: 1
+-
+  name: 'Mississippi'
+  abbr: 'MS'
+  electoral_votes: 6
+  sway: 3
+-
+  name: 'Nebraska'
+  abbr: 'NE'
+  electoral_votes: 5
+  sway: 1
+-
+  name: 'Oklahoma'
+  abbr: 'OK'
+  electoral_votes: 7
+  sway: 1
+-
+  name: 'Wisconsin'
+  abbr: 'WI'
+  electoral_votes: 10
+  sway: -1
+-
+  name: 'Colorado'
+  abbr: 'CO'
+  electoral_votes: 9
+  sway: 0
+-
+  name: 'Kentucky'
+  abbr: 'KY'
+  electoral_votes: 8
+  sway: 1
+-
+  name: 'Washington'
+  abbr: 'WA'
+  electoral_votes: 11
+  sway: -1
+-
+  name: 'West Virginia'
+  abbr: 'WV'
+  electoral_votes: 5
+  sway: 2
+-
+  name: 'Kansas'
+  abbr: 'KS'
+  electoral_votes: 6
+  sway: 2
+-
+  name: 'Montana'
+  abbr: 'MT'
+  electoral_votes: 3
+  sway: 2
+-
+  name: 'Oregon'
+  abbr: 'OR'
+  electoral_votes: 7
+  sway: -2
+-
+  name: 'Connecticut'
+  abbr: 'CT'
+  electoral_votes: 7
+  sway: -2
+-
+  name: 'Georgia'
+  abbr: 'GA'
+  electoral_votes: 15
+  sway: 3
+-
+  name: 'Maryland'
+  abbr: 'MD'
+  electoral_votes: 10
+  sway: -1
+-
+  name: 'Massachusetts'
+  abbr: 'MA'
+  electoral_votes: 12
+  sway: -3
+-
+  name: 'Michigan'
+  abbr: 'MI'
+  electoral_votes: 17
+  sway: -1
+-
+  name: 'Minnesota'
+  abbr: 'MN'
+  electoral_votes: 10
+  sway: -2
+-
+  name: 'Pennsylvania'
+  abbr: 'PA'
+  electoral_votes: 21
+  sway: 0
+-
+  name: 'California'
+  abbr: 'CA'
+  electoral_votes: 55
+  sway: -1
+-
+  name: 'Hawaii'
+  abbr: 'HI'
+  electoral_votes: 4
+  sway: -1
+-
+  name: 'Idaho'
+  abbr: 'ID'
+  electoral_votes: 4
+  sway: 2
+-
+  name: 'New Jersey'
+  abbr: 'NJ'
+  electoral_votes: 15
+  sway: -2
+-
+  name: 'South Dakota'
+  abbr: 'SD'
+  electoral_votes: 3
+  sway: 0
+-
+  name: 'New York'
+  abbr: 'NY'
+  electoral_votes: 31
+  sway: -2
+-
+  name: 'North Dakota'
+  abbr: 'ND'
+  electoral_votes: 3
+  sway: -2
+-
+  name: 'Ohio'
+  abbr: 'OH'
+  electoral_votes: 20
+  sway: 0
+-
+  name: 'Rhode Island'
+  abbr: 'RI'
+  electoral_votes: 4
+  sway: -2
+-
+  name: 'Texas'
+  abbr: 'TX'
+  electoral_votes: 34
+  sway: 2
+-
+  name: 'Vermont'
+  abbr: 'VT'
+  electoral_votes: 3
+  sway: -2
+-
+  name: 'Wyoming'
+  abbr: 'WY'
+  electoral_votes: 3
+  sway: 2
