@@ -9,6 +9,14 @@ module SuperTues
   module Game
     # Your code goes here...
 
+    @config = { 
+      candidates_per_player: 3
+    }
+
+    def self.config
+      @config
+    end
+
     def self.load_candidates_yaml
       yaml_filename = File.join File.dirname(__FILE__), "yaml/candidates.yaml"
       YAML::load File.open(yaml_filename)

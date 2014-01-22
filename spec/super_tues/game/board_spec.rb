@@ -26,8 +26,19 @@ module SuperTues
         end
 
         describe "picking candidates" do
+          before(:each) { board.add_players('bob', 'tom', 'jim') }
+          it "deals candidates to players" do
+            board.deal_candidates
+            board.players.each { |player| player.candidates_dealt.count.should == SuperTues::Game.config[:candidates_per_player] }
+          end 
+
+          it "candidates are unique" do
+            board.deal_candidates
+            dealt = board.players.map { |player| player.candidates_dealt }.flatten
+            dealt.length.should == dealt.uniq.length
+          end
         end
-      end      
+      end
     end
 
   end

@@ -19,6 +19,13 @@ module SuperTues
         candidates - players.map(&:candidate)
       end
 
+      def deal_candidates
+        ary = candidates.shuffle
+        players.each do |player|
+          player.candidates_dealt = ary.shift(SuperTues::Game.config[:candidates_per_player])
+        end
+      end
+
     private     
 
       def add_candidates
