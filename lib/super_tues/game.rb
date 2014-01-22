@@ -8,6 +8,7 @@ require "super_tues/game/day"
 require "super_tues/game/events/event"
 require "super_tues/game/events/payday"
 require "super_tues/game/events/news"
+require "super_tues/game/events/actions"
 
 require 'yaml'
 
