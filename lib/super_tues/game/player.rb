@@ -7,7 +7,7 @@ module SuperTues
     #    
     #  Players are given a name "e.g. John" that are distinct from their candidates name.
     class Player
-      attr_accessor :name
+      attr_accessor :name, :candidate
       attr_reader :board
 
       def initialize(name, board)

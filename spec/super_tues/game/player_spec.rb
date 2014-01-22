@@ -24,6 +24,7 @@ module SuperTues
       end
 
       describe "candidate" do
+        specify { player.should respond_to :candidate }
       end
     end
 
