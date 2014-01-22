@@ -5,8 +5,9 @@ module SuperTues
 
     describe Day do
       
-      let(:day) { Day.new(date: "2016-1-3") }
+      let(:day) { Day.new(date: "2016-1-3", events: []) }
       specify { day.date.should == Date.new(2016, 1, 3) }
+      specify { day.events.should be_a Array }
 
     end
 

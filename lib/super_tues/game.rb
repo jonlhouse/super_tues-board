@@ -19,19 +19,20 @@ module SuperTues
       @config
     end
 
-    def self.load_candidates_yaml
-      yaml_filename = File.join File.dirname(__FILE__), "yaml/candidates.yaml"
-      YAML::load File.open(yaml_filename)
-    rescue Errno::ENOENT => e
-      # log(:warning, "YAML configuration file couldn't be found. Using defaults.")
-      raise e
-    rescue Psych::SyntaxError => e
-      # log(:warning, "YAML configuration file contains invalid syntax. Using defaults.")
-      raise e      
+    def self.load_candidates
+      load_yaml('candidates')
     end
 
-    def self.load_states_yaml
-      yaml_filename = File.join File.dirname(__FILE__), "yaml/states.yaml"
+    def self.load_states
+      load_yaml('states')
+    end
+
+    def self.load_days
+      load_yaml('days')
+    end
+
+    def self.load_yaml(filename)
+      yaml_filename = File.join File.dirname(__FILE__), "yaml/#{filename}.yaml"
       YAML::load File.open(yaml_filename)
     rescue Errno::ENOENT => e
       # log(:warning, "YAML configuration file couldn't be found. Using defaults.")
