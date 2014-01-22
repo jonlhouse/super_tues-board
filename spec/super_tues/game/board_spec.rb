@@ -22,7 +22,13 @@ module SuperTues
           specify { board.states.each { |state| state.picks.empty?.should be_true } }
           specify { board.states.each { |state| state.electoral_votes.should > 0 } }
           specify { board.states.each { |state| state.sway.should be_within(4).of(0) } }
+        end
 
+        describe "days" do
+          # new game initializes the game day array
+          specify { board.days.should_not be_empty }
+          let(:first_day) { board.days.first }
+          specify { first_day.date.should == Date.new(2016, 1, 4)}
         end
       end
 

@@ -3,6 +3,7 @@ require "super_tues/game/board"
 require "super_tues/game/player"
 require "super_tues/game/candidate"
 require "super_tues/game/state"
+require "super_tues/game/day"
 
 require 'yaml'
 
