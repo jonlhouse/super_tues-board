@@ -5,6 +5,9 @@ require "super_tues/game/candidate"
 require "super_tues/game/state"
 require "super_tues/game/day"
 
+require "super_tues/game/events/event"
+require "super_tues/game/events/payday"
+
 require 'yaml'
 
 module SuperTues
