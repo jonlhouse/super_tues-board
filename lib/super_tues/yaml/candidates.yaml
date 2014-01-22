@@ -1,6 +1,108 @@
 -
-  name: "Old Senator Barnes"
-  clout: 20
-  cash: 80
+  name: 'Representative Jenkins'
+  cash: 8
+  clout: 6
+  cards: 3
+  state: 'IN'
+  age: 62
+  special: 'Representative Jenkins may play two cards each Friday'
+  description: 'Representative Jack Jenkins has gained the respect of both parties during a long and steady congressional career. He has recently been angered by the state of Washington politics.  This passion has made him a firebrand against corruption and waste.  Has has made useful contacts amongst those who have previously been excluded from power politics.'
+-
+  name: 'Hoss Thoreau'
+  cash: 14
+  clout: 8
+  cards: 1
+  state: 'TX'
+  age: 60
+  special: 
+  description: 'P. Hoss Thoreau built a reputation for no-nonsense business as a billionaire oilman in the ‘80s.  Since entering politics, he has reversed his position on nonsense, but has retained his position on lots of money.  He expects that this platform will resonate with the majority of voters.'
+-
+  name: 'Governor Wattsamatta'
+  cash: 10
+  clout: 7
   cards: 2
-  description: "Old name Barnes"
+  state: 'CA'
+  age: 48
+  special: 'Gov. Wattsamatta starts with a total of 15 pick in California.'
+  description: 'Governor John Wattsamatta is a recent addition to the national stage.  He has a crafted a successful career as an actor before marrying the granddaughter of a famous Italian legislator.  Taking her name along with her families interest in politics, he was elected to lead California and rises a waves of local approval to the national scene.'
+-
+  name: 'Old Senator Barnes'
+  cash: 6
+  clout: 16
+  cards: 1
+  state: 'MO'
+  age: 76
+  special: 
+  description: 'Senator Joseph B. Barnes was a lawyer before he entered public service.  He has been in the senate longer than most can remember and heads several influential committees.  Upon hearing that his great granddaughter was born with one brown eye and one blue, he decided to run for President in the hopes of increasing health research.'
+-
+  name: 'Governor William H. Pumpernickel'
+  cash: 9
+  clout: 13
+  cards: 1
+  state: 'NH'
+  age: 77
+  special: 
+  description: 'Governor William H. Pumpernickel has watched candidates tramp through his home state for decades and recons that he has learned the necessary tricks.  Having only held office for one term, he has nevertheless doubled the state’s agriculture profits (in part by counting marijuana sales).'
+-
+  name: 'Representative Stark'
+  cash: 7
+  clout: 15
+  cards: 1
+  state: 'LA'
+  age: 51
+  special: 
+  description: 'Representative Stark has been eyeing a national run ever since she came to Louisiana to run for the house of representatives.  A native of Montana, she was attracted to the reputation of Louisiana politics.  Since being elected, she has gained the reputation of a top-notch organizer and a woman not to be crossed.'
+-
+  name: 'Frank Allen'
+  cash: 8
+  clout: 7
+  cards: 3
+  state: 'MN'
+  age: 52
+  special: 'Frank Allen may move up t 1 ½ spaces on the political spectrum instead of the normal 1.'
+  description: 'Frank Allan made fun of politicians for years until his 7-year-old son once mocked, “Well, if you’re so smart, why don’t you do it?” Taking the sentiment to heart, he has decided to run.'
+-
+  name: 'Young Senator Henry'
+  cash: 7
+  clout: 12
+  cards: 2
+  state: 'SC'
+  age: 44
+  special: 
+  description: 'First-term Senator Henry P. Henry is a former litigator and educator.  Having learned to deal with victims and felons, as well as scholars and felons, his message currently has broad appeal across the nation.  This is especially true in Washington, where speculating legislators are eyeing a surprise appointment with a Henry administration. '
+-
+  name: 'Jackson Sharp'
+  cash: 9
+  clout: 10
+  cards: 2
+  state: 'NY'
+  age: 48
+  special: 
+  description: 'Jackson Sharp represents a powerful New York lobby and insists that he is ready for the National scene.  While resonating in urban centers, his critics doubt that his message of a national subway system will catch on in the great plains.  Nevertheless, he insists that his campaign is in it for the long haul.'
+-
+  name: 'Senator Welldone'
+  cash: 10
+  clout: 11
+  cards: 2
+  state: 'VA'
+  age: 57
+  special: 'Welldone may never move to the right of 4 ½ on the political spectrum.'
+  description: 'Senator Raul Welldone was born in Virginia to Jewish immigrants from Mexico.  A Professor of Political Science for 25 years at one of the nation’s more respected Liberal arts colleges, Senator welldone entered politics at the behest of a surging grassroots movement.  He has undertaken this campaign to raise progressive issues to the forefront.  Few in Washington give him much of a chance.'
+-
+  name: 'Jill Bates'
+  cash: 16
+  clout: 6
+  cards: 1
+  state: 'CA'
+  age: 40
+  special: 
+  description: 'Jill Bates made more money as a spreadsheet developer than she could tolerate with good conscience.  In the hopes of organizing the country towards greater overall efficiency, she has thrown her hat into the ring.  If nothing else, she figures her accountants might be distracted.'
+-
+  name: 'Governor Right'
+  cash: 8
+  clout: 11
+  cards: 2
+  state: 'NC'
+  age: 58
+  special: 
+  description: 'Governor Avecladouceur Right became governor of North Carolina after a cabinet position in a previous administration.  Having surpassed conventional barriers her whole life, she is not constrained by the rules that often limit others.'

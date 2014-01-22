@@ -16,16 +16,18 @@ module SuperTues
         end
       end
 
-      describe "players" do
-        
-        it "add players and updates player's board" do
-          board.add_players('bob', 'tom')
-          board.players.count.should == 2 
-          board.players.each { |player| player.board.should == board }          
+      describe "setup" do
+        describe "adding players" do        
+          it "add players and updates player's board" do
+            board.add_players('bob', 'tom')
+            board.players.count.should == 2 
+            board.players.each { |player| player.board.should == board }          
+          end
         end
 
-      end
-      
+        describe "picking candidates" do
+        end
+      end      
     end
 
   end
