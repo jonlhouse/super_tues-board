@@ -3,8 +3,8 @@ require 'spec_helper'
 module SuperTues
   module Game
 
-    describe OpportunityDeck do
-      let(:deck) { OpportunityDeck.new }
+    describe CardDeck do
+      let(:deck) { CardDeck.new }
       specify { deck.should be_a Array }
     end
 

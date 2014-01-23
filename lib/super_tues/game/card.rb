@@ -1,7 +1,7 @@
 module SuperTues
   module Game
 
-    class OpportunityCard
+    class Card
 
       attr_reader :title, :description, :effect
 

@@ -2,19 +2,19 @@ module SuperTues
   module Game
 
     class Board
-      attr_reader :players, :candidates, :states, :days, :opportunity_deck
+      attr_reader :players, :candidates, :states, :days, :card_deck
 
       def initialize()
         @players = []
         @candidates = []
         @states = []
         @days = []
-        @opportunity_deck = OpportunityDeck.new
+        @card_deck = CardDeck.new
         @turn = 1
         init_candidates
         init_states
         init_days
-        init_opportunity_cards
+        init_cards
       end
 
       def add_players(*player_names)
@@ -34,7 +34,11 @@ module SuperTues
       end
 
       def to_s
-        "Game State: #{players.count} players, #{date}, turn: #{@turn}"
+        "<Game State: #{players.count} players, turn: #{@turn}>"
+      end
+
+      def inspect
+        to_s
       end
 
     private     
@@ -57,12 +61,13 @@ module SuperTues
         end
       end
 
-      def init_opportunity_cards
-        SuperTues::Game.load_opportunity_cards.each do |card_hash|
+      def init_cards
+        SuperTues::Game.load_cards.each do |card_hash|
           ( card_hash.delete('count') { 1 } ).times do
-            opportunity_deck << OpportunityCard.new(card_hash.with_indifferent_access)
-          end
+            card_deck << Card.new(card_hash.with_indifferent_access)
+          end          
         end
+        card_deck.shuffle!
       end
 
     end

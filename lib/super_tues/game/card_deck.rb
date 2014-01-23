@@ -1,7 +1,7 @@
 module SuperTues
   module Game
 
-    class OpportunityDeck < Array
+    class CardDeck < Array
     end
 
   end

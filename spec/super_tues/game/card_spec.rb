@@ -3,8 +3,8 @@ require 'spec_helper'
 module SuperTues
   module Game
 
-    describe OpportunityCard do
-      let(:card) { OpportunityCard.new(
+    describe Card do
+      let(:card) { Card.new(
         title: 'Visit Sunny Florida', 
         description: 'Play 3 picks in Texas\'s bin.',
         effect: {
