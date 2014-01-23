@@ -12,9 +12,11 @@ require "super_tues/game/events/actions"
 require "super_tues/game/events/read_bill"
 require "super_tues/game/events/vote_bill"
 require "super_tues/game/events/primary"
+require "super_tues/game/events/rent"
 
 require 'active_support/core_ext/object'
 require 'active_support/core_ext/hash'
+require 'active_support/core_ext/string'
 
 require 'yaml'
 

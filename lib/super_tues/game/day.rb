@@ -17,7 +17,6 @@ module SuperTues
           if event.is_a?(Events::Event)
             event
           else
-            puts "Building event: #{event}"
             Events::Event.build(event)
           end
         end

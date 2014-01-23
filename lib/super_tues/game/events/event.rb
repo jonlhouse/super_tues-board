@@ -28,16 +28,7 @@ module SuperTues
 
       private
         def self.event_klass(name)
-          case name.to_sym
-          when :payday then Payday
-          when :actions then Actions
-          when :news then News
-          when :primary then Primary
-          when :read_bill then ReadBill
-          when :vote_bill then VoteBill
-          else
-            raise ArgumentError.new("unknown event name: #{name}")
-          end
+          "SuperTues::Game::Events::#{name.to_s.camelcase}".constantize
         end
 
       end
