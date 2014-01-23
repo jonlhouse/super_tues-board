@@ -2,13 +2,14 @@ module SuperTues
   module Game
 
     class Board
-      attr_reader :players, :candidates, :states, :days
+      attr_reader :players, :candidates, :states, :days, :opportunity_deck
 
       def initialize()
         @players = []
         @candidates = []
         @states = []
         @days = []
+        @turn = 1
         init_candidates
         init_states
         init_days
@@ -28,6 +29,10 @@ module SuperTues
         players.each do |player|
           player.candidates_dealt = ary.shift(SuperTues::Game.config[:candidates_per_player])
         end
+      end
+
+      def to_s
+        "Game State: #{players.count} players, #{date}, turn: #{@turn}"
       end
 
     private     

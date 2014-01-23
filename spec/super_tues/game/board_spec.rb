@@ -30,6 +30,16 @@ module SuperTues
           let(:first_day) { board.days.first }
           specify { first_day.date.should == Date.new(2016, 1, 4)}
         end
+
+        describe "opportunity deck and cards" do
+          specify { board.should respond_to :opportunity_deck }
+          specify { board.opportunity_deck.should_not be_empty }
+          specify { board.opportunity_deck.each { |card| card.should be_a OpportunityCard } }
+          it "should be shuffled" do
+            OpportunityDeck.any_instance.should_receive :shuffle
+            Board.new
+          end
+        end
       end
 
       describe "setup" do

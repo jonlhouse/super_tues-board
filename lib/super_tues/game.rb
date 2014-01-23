@@ -4,6 +4,7 @@ require "super_tues/game/player"
 require "super_tues/game/candidate"
 require "super_tues/game/state"
 require "super_tues/game/day"
+require "super_tues/game/opportunity_deck"
 
 require "super_tues/game/events/event"
 require "super_tues/game/events/payday"
