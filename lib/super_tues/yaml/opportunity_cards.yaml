@@ -1,0 +1,143 @@
+-
+  title: 'Television Spot'
+  descption: 'Pay $1.5M to play 4 picks each into 3 state bins.'
+  effect:
+    target: 'self'
+    action:
+      play_picks: 12
+      where:
+        any: '3 states'
+      how: 'split_evenly'
+  cost:
+    cash: 15
+  count: 3
+-
+  title: 'Dirty Little Secret'
+  description: 'Pay 10 clout and $500k to discard.  If uncovered lose all clout, all cards and miss next payday'
+  action:
+    target: 'self'
+    action:
+      discard: 'this_card'
+  cost:
+    cash: 5
+    clout: 10
+-
+  title: 'Journalist'
+  description: "Expose 1 candidates opportunity cards (uncovers Dirty Little Secrets)."
+  action:
+    target: 'any'
+    action: 'expose_cards'
+  cost: 'free'
+  count: 3
+-
+  title: 'Spend time with the leadership'
+  description: 'Gain 5 clout'
+  action:
+    target: 'self'
+    action:
+      receive:
+        clout: 5
+        from: 'bank'
+  cost: 'free'
+  count: 3
+- 
+  title: 'Fundrasing Dinner'
+  description: 'Gain $500k'
+  action:
+    target: 'self'
+    action:
+      receive:
+        cash: 5
+        from: 'bank'
+  cost: 'free'
+  count: 3
+-
+  title: 'Committee Chair'
+  description: 'Each candidate pays you $200k or 2 clout (their choice).'
+  action:
+    target: 'self'
+    receive:      
+      clout: 2
+      from: 'others'
+  cost: 'free'
+  count: 3
+-
+  title: 'Double Time!'
+  description: 'Double limit of any normal play (e.g. buy 10 picks, poll 2 states, move 2 spots) in addition to playing this card.'
+  action:
+    target: 'self'
+    rule_change:
+      duration: 1
+      rules:
+        radio_spot:
+          picks: '2x'
+        political_favor:
+          picks: '2x'
+        focus_on_issues:
+          moves: '2x'
+        poll_states:
+          states: '2x'
+        play_opportunity_cards:
+          cards: '2x'
+        discard_opportunity_cards:
+          cards: '2x'
+  card_counts_as_action: false
+  cost: 'free'
+  count: 3
+-
+  title: 'Half Price!'
+  description: 'Purchase picks for $100k or 1 clout this turn in addition to playing this card.'
+  action:
+    target: 'self'
+    action: 
+      target: 'self'
+      rule_change:
+        duration: 1
+        rules:
+          radio_spot:
+            cash: 1
+          political_favor:
+            clout: 1
+  card_counts_as_action: false
+  cost: 'free'
+  count: 3
+-
+  title: 'Visit Sunny Texas'
+  description: "Play 3 picks in Texas's bin."
+  effect:
+    target: 'self'
+    action: 
+      play_picks: 3
+      where: 'Texas'
+  cost: 'free'
+  count: 2
+-
+  title: 'Visit Sunny California'
+  description: "Play 3 picks in California's bin."
+  effect:
+    target: 'self'
+    action: 
+      play_picks: 3
+      where: 'California'
+  cost: 'free'
+  count: 2
+-
+  title: 'Visit Sunny New York'
+  description: "Play 3 picks in New York's bin."
+  effect:
+    target: 'self'
+    action: 
+      play_picks: 3
+      where: 'New York'
+  cost: 'free'
+  count: 2
+-
+  title: 'Visit Sunny Florida'
+  description: "Play 3 picks in Florida's bin."
+  effect:
+    target: 'self'
+    action: 
+      play_picks: 3
+      where: 'Florida'
+  cost: 'free'
+  count: 2

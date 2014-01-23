@@ -5,6 +5,7 @@ require "super_tues/game/candidate"
 require "super_tues/game/state"
 require "super_tues/game/day"
 require "super_tues/game/opportunity_deck"
+require "super_tues/game/opportunity_card"
 
 require "super_tues/game/events/event"
 require "super_tues/game/events/payday"
@@ -43,6 +44,10 @@ module SuperTues
 
     def self.load_days
       load_yaml('days')
+    end
+
+    def self.load_opportunity_cards
+      load_yaml('opportunity_cards')
     end
 
     def self.load_yaml(filename)

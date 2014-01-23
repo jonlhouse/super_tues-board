@@ -9,10 +9,12 @@ module SuperTues
         @candidates = []
         @states = []
         @days = []
+        @opportunity_deck = OpportunityDeck.new
         @turn = 1
         init_candidates
         init_states
         init_days
+        init_opportunity_cards
       end
 
       def add_players(*player_names)
@@ -54,6 +56,15 @@ module SuperTues
           days << Day.new(day_hash.with_indifferent_access)
         end
       end
+
+      def init_opportunity_cards
+        SuperTues::Game.load_opportunity_cards.each do |card_hash|
+          ( card_hash.delete('count') { 1 } ).times do
+            opportunity_deck << OpportunityCard.new(card_hash.with_indifferent_access)
+          end
+        end
+      end
+
     end
 
   end
