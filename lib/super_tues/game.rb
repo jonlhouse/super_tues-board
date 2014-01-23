@@ -13,6 +13,9 @@ require "super_tues/game/events/read_bill"
 require "super_tues/game/events/vote_bill"
 require "super_tues/game/events/primary"
 
+require 'active_support/core_ext/object'
+require 'active_support/core_ext/hash'
+
 require 'yaml'
 
 module SuperTues
@@ -41,7 +44,7 @@ module SuperTues
 
     def self.load_yaml(filename)
       yaml_filename = File.join File.dirname(__FILE__), "yaml/#{filename}.yaml"
-      YAML::load File.open(yaml_filename)
+      YAML::load(File.open(yaml_filename))      
     rescue Errno::ENOENT => e
       # log(:warning, "YAML configuration file couldn't be found. Using defaults.")
       raise e

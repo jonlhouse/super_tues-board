@@ -34,19 +34,19 @@ module SuperTues
 
       def init_candidates
         SuperTues::Game::load_candidates.each do |candidate_hash|
-          candidates << Candidate.new(candidate_hash)
+          candidates << Candidate.new(candidate_hash.with_indifferent_access)
         end
       end
 
       def init_states
         SuperTues::Game::load_states.each do |state_hash|
-          states << State.new(state_hash)
+          states << State.new(state_hash.with_indifferent_access)
         end
       end
 
       def init_days
         SuperTues::Game.load_days.each do |day_hash|
-          days << Day.new(day_hash)
+          days << Day.new(day_hash.with_indifferent_access)
         end
       end
     end
