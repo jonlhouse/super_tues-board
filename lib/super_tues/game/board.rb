@@ -2,7 +2,7 @@ module SuperTues
   module Game
 
     class Board
-      attr_reader :players, :candidates, :states, :days, :card_deck
+      attr_reader :players, :candidates, :states, :days, :card_deck, :news_deck
 
       def initialize()
         @players = []
@@ -10,11 +10,13 @@ module SuperTues
         @states = []
         @days = []
         @card_deck = CardDeck.new
+        @news_deck = NewsDeck.new
         @turn = 1
         init_candidates
         init_states
         init_days
         init_cards
+        init_news
       end
 
       def add_players(*player_names)
@@ -68,6 +70,15 @@ module SuperTues
           end          
         end
         card_deck.shuffle!
+      end
+
+      def init_news
+        SuperTues::Game.load_news.each do |news_hash| 
+          ( news_hash.delete('count') { 1 } ).times do
+            news_deck << News.new(news_hash.with_indifferent_access)
+          end
+        end
+        news_deck.shuffle!
       end
 
     end

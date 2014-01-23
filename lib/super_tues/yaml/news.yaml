@@ -1,0 +1,33 @@
+-
+  title: 'Big Business Loves Everybody'
+  description: 'All candidates collect $500K.'
+  action:
+    target: 'all_players'
+    receive:
+      cash: 5
+-
+  title: 'National History Week'
+  description: 'All candidates gain 7 clout.'
+  action:
+    target: 'all_players'
+    receive:
+      clout: 7
+-
+  title: 'Accelerated Pace'
+  description: 'Everyone may play up to 2 cards each business day for the next week'
+  action:
+    rule_change:
+      duration: 7
+      rules:
+        actions:
+          play_cards:
+            count: 2
+-
+  title: 'Legislative Vacation'
+  description: 'Next Thursday, do not vote or reveal a new bill.'
+  action: 
+    rule_change:
+      duraction: 7
+      rules:
+        events: 
+          disallow: ['read_bill', 'vote_bill']

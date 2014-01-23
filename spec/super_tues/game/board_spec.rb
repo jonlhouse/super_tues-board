@@ -40,6 +40,16 @@ module SuperTues
             Board.new
           end
         end
+
+        describe "news deck and cards" do
+          specify { board.should respond_to :news_deck }
+          specify { board.news_deck.should_not be_empty }
+          specify { board.news_deck.each { |news| news.should be_a News } }
+          it "should be suffled" do
+            NewsDeck.any_instance.should_receive :shuffle!
+            Board.new
+          end
+        end
       end
 
       describe "setup" do

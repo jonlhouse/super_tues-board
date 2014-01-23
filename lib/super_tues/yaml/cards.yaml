@@ -69,18 +69,19 @@
     rule_change:
       duration: 1
       rules:
-        radio_spot:
-          picks: '2x'
-        political_favor:
-          picks: '2x'
-        focus_on_issues:
-          moves: '2x'
-        poll_states:
-          states: '2x'
-        play_opportunity_cards:
-          cards: '2x'
-        discard_opportunity_cards:
-          cards: '2x'
+        actions:
+          radio_spot:
+            picks: '2x'
+          political_favor:
+            picks: '2x'
+          focus_on_issues:
+            moves: '2x'
+          poll_states:
+            states: '2x'
+          play_cards:
+            count: '2x'
+          discard_cards:
+            count: '2x'
   card_counts_as_action: false
   cost: 'free'
   count: 3
@@ -93,11 +94,12 @@
       target: 'self'
       rule_change:
         duration: 1
-        rules:
-          radio_spot:
-            cash: 1
-          political_favor:
-            clout: 1
+        actions:
+          rules:
+            radio_spot:
+              cash: 1
+            political_favor:
+              clout: 1
   card_counts_as_action: false
   cost: 'free'
   count: 3
