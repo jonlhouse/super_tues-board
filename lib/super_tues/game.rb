@@ -11,6 +11,7 @@ require "super_tues/game/events/news"
 require "super_tues/game/events/actions"
 require "super_tues/game/events/read_bill"
 require "super_tues/game/events/vote_bill"
+require "super_tues/game/events/primary"
 
 require 'yaml'
 

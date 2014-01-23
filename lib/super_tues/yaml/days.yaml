@@ -13,7 +13,7 @@
 -
   date: '2016-1-7'
   events:
-    - 'read bill'
+    - 'read_bill'
     - rent: { cost: 1 }
 -
   date: '2016-1-8'
@@ -43,8 +43,8 @@
 -
   date: '2016-1-14'
   events:
-    - 'vote bill'
-    - 'read bill'
+    - 'vote_bill'
+    - 'read_bill'
     - rent: { cost: 2 }
 -
   date: '2016-1-15'
@@ -62,7 +62,7 @@
 -
   date: '2016-1-18'
   events:
-    - { primaries: ['Iowa'] }
+    - primary: { state: 'Iowa' }
 -
   date: '2016-1-19'
   events:
@@ -74,8 +74,8 @@
 -
   date: '2016-1-21'
   events:
-    - 'vote bill'
-    - 'read bill'
+    - 'vote_bill'
+    - 'read_bill'
     - rent: { cost: 3 }
 -
   date: '2016-1-22'
@@ -84,7 +84,7 @@
 -
   date: '2016-1-23'
   events:
-    - { primaries: ['Nevada'] }
+    - primary: { state: 'Nevada' }
 -
   date: '2016-1-24'
   events:
