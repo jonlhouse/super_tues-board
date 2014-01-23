@@ -1,0 +1,26 @@
+-
+  title: 'Campaign Finance Reform'
+  description: "If passed, each candidate's payday is reduced by $300K."
+  votes: 
+    clout: 6
+    voting: 'aye'
+  action:
+    candidate_change:
+      duration: 'permanent'
+      target: 'all'
+      payday: 
+        cash: '-3'
+-
+  title: 'Gun Control'
+  description: 'If passed, the most conservative candidate on the spectrum gains 2 picks in each primary.'
+  caveat: 'Ignore this benefit in states that lean liberal.'
+  votes: 
+    clout: 5
+    voting: 'aye'
+  effect:
+    duration: 'permanent'
+    on: 'primary'
+    which: 'right_leaning'
+    bonus_picks:
+      to: 'most_conservative'
+      picks: 2
