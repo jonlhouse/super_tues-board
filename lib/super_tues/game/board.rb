@@ -15,8 +15,6 @@ module SuperTues
         init_candidates
         init_states
         init_days
-        init_cards
-        init_news
       end
 
       def add_players(*player_names)
@@ -62,25 +60,6 @@ module SuperTues
           days << Day.new(day_hash.with_indifferent_access)
         end
       end
-
-      def init_cards
-        SuperTues::Game.load_cards.each do |card_hash|
-          ( card_hash.delete('count') { 1 } ).times do
-            card_deck << Card.new(card_hash.with_indifferent_access)
-          end          
-        end
-        card_deck.shuffle!
-      end
-
-      def init_news
-        SuperTues::Game.load_news.each do |news_hash| 
-          ( news_hash.delete('count') { 1 } ).times do
-            news_deck << News.new(news_hash.with_indifferent_access)
-          end
-        end
-        news_deck.shuffle!
-      end
-
     end
 
   end

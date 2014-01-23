@@ -4,10 +4,11 @@ require "super_tues/game/player"
 require "super_tues/game/candidate"
 require "super_tues/game/state"
 require "super_tues/game/day"
-require "super_tues/game/card_deck"
 require "super_tues/game/card"
-require "super_tues/game/news_deck"
 require "super_tues/game/news"
+require "super_tues/game/deck"
+require "super_tues/game/card_deck"
+require "super_tues/game/news_deck"
 
 require "super_tues/game/events/event"
 require "super_tues/game/events/payday"
@@ -46,14 +47,6 @@ module SuperTues
 
     def self.load_days
       load_yaml('days')
-    end
-
-    def self.load_cards
-      load_yaml('cards')
-    end
-
-    def self.load_news
-      load_yaml('news')
     end
 
     def self.load_yaml(filename)
