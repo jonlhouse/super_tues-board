@@ -1,0 +1,47 @@
+Super Tues Classes and Organization
+
+  * Player signup
+    (wait for players to sign up for a game and get the required number)
+  * Start Pre-Game
+    * Create Board
+    * Deal Candidates to Players
+    * Wait for Players to select candidates
+  * Start Game Loop
+    * Lookup current day
+    * Perform non-interactive actions
+    * Interactive actions
+    
+Rules:
+  actions:
+    multiple_actions_per_turn: false
+    allowed: [public_picks, private_picks, play_card, poll_state]
+    public_picks:
+      cost: '2 cash'
+      max: 5
+      spread: true
+    private_picks:
+      cost: '2 clout'
+      max: 5
+      spread: false
+    play_cards:
+      max: 1
+      targets: 'all'
+      
+  player:
+    actions_per_turn: 1
+    
+
+Classes:
+  * Board
+  * Player
+  * Day
+  * State
+  * Events
+    * Payday
+    * Rent
+    * ReadBill
+    * VoteBill
+    * Actions
+    * News
+    * Primary
+  
