@@ -12,6 +12,7 @@ module SuperTues
         @cards = CardDeck.new
         @news = NewsDeck.new
         @bills = BillDeck.new
+        @rules = Rules.new
         @turn = 1
         init_states
         init_days
@@ -39,6 +40,16 @@ module SuperTues
 
       def inspect
         to_s
+      end
+
+      # Rules delegators
+      # 
+      def rule(rule_str)
+        rules.rule rule_str
+      end
+
+      def allowed?(rule_str, value)
+        rules.allowed? rule_str, value
       end
 
     private     

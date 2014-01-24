@@ -65,6 +65,20 @@ module SuperTues
           end
         end
       end
+
+      describe "rules" do
+        describe "querying rules" do
+          describe "rule(rule_str)" do
+            specify { board.rule('action.radio_spot.max_picks').should == 5 }
+          end
+
+          describe "allowed?(rule_str)" do
+            specify { board.allowed?('action.play_card.max_cards', 1).should be_true }
+            specify { board.allowed?('action.play_card.max_cards', 2).should be_false }
+          end
+        end
+      end
+
     end
 
   end
