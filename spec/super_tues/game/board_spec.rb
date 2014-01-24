@@ -10,9 +10,7 @@ module SuperTues
         specify { board.should be_a Board }
 
         describe "candidates" do
-          let(:candidates) { board.remaining_candidates }
-          specify { candidates.should_not be_empty }
-          specify { candidates.each { |c| c.should be_a Candidate }}
+          let(:candidates) { board.remaining_candidates }          
         end
 
         describe "states" do

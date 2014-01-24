@@ -5,15 +5,14 @@ module SuperTues
       attr_reader :players, :candidates, :states, :days, :cards, :news, :bills
 
       def initialize()
-        @players = []
-        @candidates = []
+        @players = []        
         @states = []
         @days = []
+        @candidates = CandidateDeck.new
         @cards = CardDeck.new
         @news = NewsDeck.new
         @bills = BillDeck.new
         @turn = 1
-        init_candidates
         init_states
         init_days
       end
@@ -28,9 +27,9 @@ module SuperTues
       end
 
       def deal_candidates
-        ary = candidates.shuffle
+        choices = candidates.dup
         players.each do |player|
-          player.candidates_dealt = ary.shift(SuperTues::Game.config[:candidates_per_player])
+          player.candidates_dealt = choices.shift(SuperTues::Game.config[:candidates_per_player])
         end
       end
 
@@ -43,13 +42,6 @@ module SuperTues
       end
 
     private     
-
-      def init_candidates
-        SuperTues::Game::load_candidates.each do |candidate_hash|
-          candidates << Candidate.new(candidate_hash.with_indifferent_access)
-        end
-      end
-
       def init_states
         SuperTues::Game::load_states.each do |state_hash|
           states << State.new(state_hash.with_indifferent_access)

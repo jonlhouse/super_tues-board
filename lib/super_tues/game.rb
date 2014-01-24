@@ -11,6 +11,7 @@ require "super_tues/game/bill"
 require "super_tues/game/card_deck"
 require "super_tues/game/news_deck"
 require "super_tues/game/bill_deck"
+require "super_tues/game/candidate_deck"
 
 require "super_tues/game/events/event"
 require "super_tues/game/events/payday"

@@ -17,10 +17,6 @@ module SuperTues
         end
       end
 
-      describe "is described in a yaml file" do
-
-      end
-
     end
 
   end
