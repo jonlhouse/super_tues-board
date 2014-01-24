@@ -1,0 +1,25 @@
+actions:
+  radio_spot:
+    per: 'pick'
+    cost: { cash: 2 }
+    max: 5
+    spread: true
+  political_favor:
+    per: 'pick'
+    cost: { clout: 2 }
+    max: 5
+    spread: false
+  card:
+    max: 1
+    cost: 'free'
+  discard:
+    max: 1
+    cost: 'free'
+  poll:
+    max: 1
+    cost: 'free'
+  move:
+    distance: 1
+    cost: 'free'
+player:
+  actions_per_turn: 1
