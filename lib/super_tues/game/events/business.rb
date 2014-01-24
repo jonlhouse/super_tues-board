@@ -2,7 +2,7 @@ module SuperTues
   module Game
     module Events
 
-      class Actions < Event
+      class Business < Event
 
         def happen
         end

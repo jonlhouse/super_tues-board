@@ -4,8 +4,8 @@ module SuperTues
   module Game
     module Events
 
-      describe Actions do
-        let(:actions) { Actions.new }
+      describe Business do
+        let(:actions) { Business.new }
         specify { actions.should respond_to :happen }
       end
     
