@@ -2,15 +2,16 @@ module SuperTues
   module Game
 
     class Board
-      attr_reader :players, :candidates, :states, :days, :card_deck, :news_deck
+      attr_reader :players, :candidates, :states, :days, :cards, :news, :bills
 
       def initialize()
         @players = []
         @candidates = []
         @states = []
         @days = []
-        @card_deck = CardDeck.new
-        @news_deck = NewsDeck.new
+        @cards = CardDeck.new
+        @news = NewsDeck.new
+        @bills = BillDeck.new
         @turn = 1
         init_candidates
         init_states

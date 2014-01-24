@@ -32,23 +32,15 @@ module SuperTues
         end
 
         describe "card deck and cards" do
-          specify { board.should respond_to :card_deck }
-          specify { board.card_deck.should_not be_empty }
-          specify { board.card_deck.each { |card| card.should be_a Card } }
-          it "should be shuffled" do
-            CardDeck.any_instance.should_receive :shuffle!
-            Board.new
-          end
+          specify { board.cards.should_not be_empty }
         end
 
-        describe "news deck and cards" do
-          specify { board.should respond_to :news_deck }
-          specify { board.news_deck.should_not be_empty }
-          specify { board.news_deck.each { |news| news.should be_a News } }
-          it "should be suffled" do
-            NewsDeck.any_instance.should_receive :shuffle!
-            Board.new
-          end
+        describe "news deck and news" do
+          specify { board.news.should_not be_empty }
+        end
+
+        describe "bills deck" do
+          specify { board.bills.should_not be_empty }
         end
       end
 
