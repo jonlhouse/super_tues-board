@@ -5,8 +5,7 @@ module SuperTues
     module Events
 
       describe ReadBill do
-        let(:read_bill) { ReadBill.new }
-        specify { read_bill.should respond_to :happen }
+        specify { ReadBill.should < Event }
       end
 
     end

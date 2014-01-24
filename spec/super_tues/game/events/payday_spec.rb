@@ -4,10 +4,7 @@ module SuperTues
   module Game
     module Events
       describe Payday do
-
-        let(:payday) { Payday.new }
-        specify { payday.should respond_to :happen }
-
+        specify { Payday.should < Event }
       end
     end
   end

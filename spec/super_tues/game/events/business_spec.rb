@@ -5,8 +5,7 @@ module SuperTues
     module Events
 
       describe Business do
-        let(:actions) { Business.new }
-        specify { actions.should respond_to :happen }
+        specify { Business.should < Event }
       end
     
     end

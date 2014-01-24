@@ -5,8 +5,7 @@ module SuperTues
     module Events
 
       describe VoteBill do
-        let(:vote_bill) { VoteBill.new }
-        specify { vote_bill.should respond_to :happen }
+        specify { VoteBill.should < Event }
       end
 
     end
