@@ -3,6 +3,8 @@ module SuperTues
 
     class Rules
 
+      class UnknownRule < ArgumentError ; end
+
       def initialize()
         @current = Rules.default.dup
       end
