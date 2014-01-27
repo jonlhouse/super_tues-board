@@ -13,6 +13,24 @@ module SuperTues
           end
         end
 
+        describe "API functions" do
+          let(:board) { nil }
+          describe "#perform(board)" do
+            specify { Action.new.should respond_to :perform }
+            specify { expect { Action.new.perform(board) }.to raise_error NotImplementedError }
+          end
+
+          describe "#cost(board)" do
+            specify { Action.new.should respond_to :cost }
+            specify { expect { Action.new.cost(board) }.to raise_error NotImplementedError }          
+          end
+
+          describe "#allowed?(board)" do
+            specify { Action.new.should respond_to :allow? }
+            specify { expect { Action.new.allow?(board) }.to raise_error NotImplementedError }          
+          end
+        end
+
       end
 
     end
