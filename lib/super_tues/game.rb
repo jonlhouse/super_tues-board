@@ -15,14 +15,8 @@ require "super_tues/game/news_deck"
 require "super_tues/game/bill_deck"
 require "super_tues/game/candidate_deck"
 
-require "super_tues/game/events/event"
-require "super_tues/game/events/payday"
-require "super_tues/game/events/news"
-require "super_tues/game/events/business"
-require "super_tues/game/events/read_bill"
-require "super_tues/game/events/vote_bill"
-require "super_tues/game/events/primary"
-require "super_tues/game/events/rent"
+require "super_tues/game/events"
+require "super_tues/game/actions"
 
 require 'active_support/core_ext/object'
 require 'active_support/core_ext/hash'
