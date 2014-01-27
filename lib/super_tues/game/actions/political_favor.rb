@@ -3,6 +3,9 @@ module SuperTues
     module Actions
 
       class PoliticalFavor < Action
+        def initialize(attrs = {})
+          super
+        end
       end
 
     end

@@ -3,6 +3,9 @@ module SuperTues
     module Actions
 
       class PlayCard < Action
+        def initialize(attrs = {})
+          super
+        end
       end
 
     end
