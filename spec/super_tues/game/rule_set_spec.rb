@@ -27,26 +27,64 @@ module SuperTues
         specify { defaults.duration.should be RuleSet::PERMANENT }
       end
 
-      describe "[] and []=" do
-        let(:rset) { RuleSet.new({ this: :that, other: { foo: :bar } }) }              
-        specify { rset[:this].should == :that }
-        specify { rset[:this] = :other ; rset[:this].should == :other }
-        specify { expect { rset[] }.to raise_error }
+      describe ".dup" do
+        it "clones the underlying hash_set" do
+          copy = (original = RuleSet.new(radio_spot_attrs)).dup
+          # make sure it's copied
+          copy[:actions][:radio_spot][:max_picks].should == original[:actions][:radio_spot][:max_picks]
+          # not change it
+          copy[:actions][:radio_spot][:max_picks] = 42
+          original[:actions][:radio_spot][:max_picks].should_not == 42
+        end
+      end
 
-        describe "should raise error when key doesn't exist" do
-          specify { expect { rset[nil] }.to raise_error }
-          specify { expect { rset[:fail] }.to raise_error }
-          specify { expect { rset['other.fail'] }.to raise_error }
-
-          context "unless default is given" do
-            specify { expect { rset[:fail, 'works'] }.to_not raise_error }
-            specify { (rset[:fail, 'works']).should == 'works' }
+      describe "[]" do
+        let(:rset) { RuleSet.new({ this: :that, other: { foo: :bar } }) }
+        describe "single keys can be accessed with a symbol" do
+          specify { rset[:this].should == :that }
+        end
+        describe "takes only a dot.seperated.string" do
+          specify { rset['this'].should == :that }
+          specify { rset['other.foo'].should == :bar }
+        end
+        describe "can only access end-point rules" do
+          specify { expect { rset['other'] }.to raise_error }
+        end
+        describe "raises error when key not found" do
+          fail_keys = ['other.fail', '', nil, 'fail']
+          fail_keys.each do |key|
+            specify { expect { rset[key] }.to raise_error }
           end
-        end       
 
-        context "with concattenated keys" do          
-          specify { radio_spot['actions.radio_spot.max_picks'].should == 5 }
-          specify { radio_spot['actions.radio_spot.made_up_rule', 'default'].should == 'default' }
+          describe "exception not thrown if default given" do
+            fail_keys.each do |key|
+              specify { expect { rset[key, 'some_default'].should == 'some_default' } }
+            end
+          end
+        end        
+      end
+
+      describe "[]=" do
+        let(:rset) { RuleSet.new({ this: :that, other: { foo: :bar } }) }
+        it "can change existing values" do
+          ['this', 'other.foo'].each do |key|
+            rset[key] = 'new_value'
+            rset[key].should == 'new_value'
+          end
+        end
+        it "can 'build' it's way out creating new hashes as needed" do
+          rset['a.b.c.d'] = 'new_value'          
+          rset['a.b.c.d'].should == 'new_value'
+        end
+        it "can set a hash as a value" do
+          rset['a.b.c.d'] = { e: { f: :g, h: { i: 42 } } }
+          rset['a.b.c.d.e.h.i'].should == 42
+        end
+        it "converts int/float/bools" do
+          { '42' => 42, '12.12' => 12.12, 'true' => true }.each do |expected, actual|
+            rset['test'] = expected
+            rset['test'].should == actual
+          end
         end
       end
 
@@ -58,16 +96,7 @@ module SuperTues
         specify { rset[:nil].should == nil }
       end
 
-      describe ".dup" do
-        it "clones the underlying hash_set" do
-          copy = (original = RuleSet.new(radio_spot_attrs)).dup
-          # make sure it's copied
-          copy[:actions][:radio_spot][:max_picks].should == original[:actions][:radio_spot][:max_picks]
-          # not change it
-          copy[:actions][:radio_spot][:max_picks] = 42
-          original[:actions][:radio_spot][:max_picks].should_not == 42
-        end
-      end
+      
     end
 
   end

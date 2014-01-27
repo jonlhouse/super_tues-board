@@ -3,8 +3,8 @@ module SuperTues
 
     class RuleSet
 
-      class UnknownKey < ArgumentError
-      end
+      class UnknownKey < ArgumentError ; end
+      class RuleSetError < ArgumentError ; end
 
       PERMANENT = 'permanent'
 
@@ -13,22 +13,31 @@ module SuperTues
 
       def initialize(rules_hash, duration: PERMANENT)
         raise ArgumentError.new("Empty rules hash") if rules_hash.empty?
-        @rules = convert_numeric_values(rules_hash).with_indifferent_access
+        @rules = convert_values(rules_hash).with_indifferent_access
         self.duration = Integer(duration) rescue duration
       end
 
       def [](key, *default)
         raise UnknownKey.new("#{key}") if (keys = key.to_s.split('.')).empty?
-        traverse_keys keys, default.pop
+
+        # raise exception unless rule lookup returns a string/bool/numeric/symbol
+        traverse_keys(keys, default.pop).tap do |value|
+          raise RuleSetError.new "#{key} => #{value.inspect} not valid rule" if value.is_a? Enumerable
+        end
       end
 
       def []=(key, value)
         keys = key.to_s.split('.')
         last_key = keys.pop
-        traverse_keys(keys)[last_key] = value
+        last_hash = traverse_keys(keys) do |rule_hash, key_not_found|
+          # build the new key hash and return it
+          rule_hash[key_not_found] = {}
+          rule_hash[key_not_found]
+        end
+        last_hash[last_key] = try_convert value
       end
 
-      def traverse_keys(keys, default = nil)
+      def traverse_keys(keys, default = nil, &block)
         return rules if keys.empty?
         keys.inject(rules) do |hash, key|
           if hash.has_key? key
@@ -36,7 +45,11 @@ module SuperTues
           elsif default
             default
           else
-            raise UnknownKey.new "#{key}"
+            if block_given?
+              yield hash, key
+            else
+              raise UnknownKey.new "#{key}"
+            end
           end
         end
       end
@@ -47,10 +60,20 @@ module SuperTues
       
     private
 
-      def convert_numeric_values(hash)
+      def convert_values(hash)
         deep_transform_values hash do |value|
-          Integer(value) rescue (Float(value) rescue value)
+          try_convert value
         end
+      end
+
+      def try_convert(value)
+        Integer(value) rescue (Float(value) rescue string_or_bool(value))
+      end
+
+      def string_or_bool(value)
+        return true if ['true', 'TRUE', :true].include? value
+        return false if ['false', 'FALSE', :false].include? value
+        value
       end
 
       def deep_transform_values(hash, &block)
