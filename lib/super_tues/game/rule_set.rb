@@ -16,6 +16,10 @@ module SuperTues
         self.duration = Integer(duration) rescue duration
       end
 
+      def permanent?
+        duration == PERMANENT
+      end
+
       def [](key, *default)
         raise ArgumentError, "#{key}" if (keys = key.to_s.split('.')).empty?
 

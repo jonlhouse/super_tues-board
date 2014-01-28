@@ -21,6 +21,15 @@ module SuperTues
       end
       alias_method :[], :rule
 
+      # Ammends a rule set to the rule_heirarchy.
+      #      
+      # It creates a new rule_set with an optional duration and prepends
+      #  the rule to the heirarchy.
+      #
+      def ammend(*args)
+        @rule_heirarchy.unshift RuleSet.new(args)
+      end
+
       def self.default
         @default ||= RuleSet.default
       end

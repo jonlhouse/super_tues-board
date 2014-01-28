@@ -27,6 +27,11 @@ module SuperTues
         specify { defaults.duration.should be RuleSet::PERMANENT }
       end
 
+      describe "#permanent?" do
+        specify { RuleSet.new( this: :that).permanent?.should be_true }
+        specify { RuleSet.new( { this: :that }, duration: 1).permanent?.should be_false }        
+      end
+
       describe "[]" do
         let(:rset) { RuleSet.new({ this: :that, other: { foo: :bar } }) }
         describe "single keys can be accessed with a symbol" do
