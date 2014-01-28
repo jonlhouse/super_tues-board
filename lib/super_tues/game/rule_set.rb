@@ -5,12 +5,10 @@ module SuperTues
 
       class UnknownRule < ArgumentError ; end
 
-      PERMANENT = 'permanent'
-
       attr_reader :rules
       attr_accessor :duration
 
-      def initialize(*args, duration: PERMANENT, **opts)
+      def initialize(*args, duration: :permanent, affects: :all, **opts)
         args = [opts] if args.empty?
         rule_attr = args.shift
         @rules =  case rule_attr
@@ -22,11 +20,33 @@ module SuperTues
                   when RuleSet
                     rules_attrs.deep_dup
                   end
+        @affects = Array.wrap(affects).map(&:to_s)
         self.duration = Integer(duration) rescue duration
       end
 
       def permanent?
-        duration == PERMANENT
+        duration == 'permanent' || duration == :permanent
+      end
+
+      # Returns whether this ruleset affects a given player.
+      #
+      # It looks into the @affects variable to determine boolean value.
+      #
+      # Usage:
+      #  select_rule = RuleSet.new(..., affects: ['player_1', 'player_2'])
+      #  select_rule.affects?('player_1')  #=> true
+      #  select_rule.affects?('player_5')  #=> false
+      #
+      #  global_rule = RuleSet.new(..., affects: :all)
+      #  global_rule.affects?('player_1')  #=> true
+      #  global_rule.affects?(:all)        #=> true
+      #
+      def affects?(whom = :any)
+        if @affects == ['all']
+          true
+        else
+          @affects.include? whom.to_s
+        end
       end
 
       def [](key, *default)
@@ -85,10 +105,10 @@ module SuperTues
       end
 
       def try_convert(value)
-        Integer(value) rescue (Float(value) rescue string_or_bool(value))
+        Integer(value) rescue (Float(value) rescue string_sym_or_bool(value))
       end
 
-      def string_or_bool(value)
+      def string_sym_or_bool(value)
         return true if ['true', 'TRUE', 'yes', 'YES', :true].include? value
         return false if ['false', 'FALSE', 'no', 'NO', :false].include? value
         value

@@ -12,13 +12,25 @@ module SuperTues
       context "when initializing" do
         specify { radio_spot.rules.should == radio_spot_attrs.deep_stringify_keys }
 
-        it "rules are permanent by default" do
-          radio_spot.duration.should == RuleSet::PERMANENT
+        describe ":duration option" do
+          it "permanent by default" do
+            radio_spot.duration.should == :permanent
+          end
+          it "is overridable" do
+            rset = RuleSet.new(radio_spot_attrs, duration: '1')
+            rset.duration.should == 1
+          end
+        end        
+
+        describe ":player option" do
+          it "is :all by default" do
+            rset = RuleSet.new('some.rule', 42).instance_variable_get(:@affects).should == ['all']
+          end
+          it "is overridable" do
+            rset = RuleSet.new('some.rule', 42, affects: ['player_1']).instance_variable_get(:@affects).should == ['player_1']
+          end
         end
-        it "duration is overridable" do
-          rset = RuleSet.new(radio_spot_attrs, duration: '1')
-          rset.duration.should == 1
-        end
+
         specify { expect { RuleSet.new({}) }.to raise_error }
 
         describe "can take a single rule string and value" do
@@ -29,12 +41,24 @@ module SuperTues
 
       context "default ruleset" do
         specify { defaults.rules.should_not be_empty }
-        specify { defaults.duration.should be RuleSet::PERMANENT }
+        specify { defaults.duration.should be :permanent }
       end
 
       describe "#permanent?" do
         specify { RuleSet.new( this: :that).permanent?.should be_true }
         specify { RuleSet.new( { this: :that }, duration: 1).permanent?.should be_false }        
+      end
+
+      describe "affects?" do
+        let(:select_rule) { RuleSet.new('some.rule', 42, affects: ['player_1', 'player_2']) }
+        let(:global_rule) { RuleSet.new('some.rule', 42, affects: :all) }
+
+        specify { select_rule.affects?('player_1').should be }
+        specify { select_rule.affects?('player_5').should_not be }
+
+        specify { global_rule.affects?('player_1').should be }
+        specify { global_rule.affects?('player_5').should be }
+        specify { global_rule.affects?.should be }
       end
 
       describe "[]" do
