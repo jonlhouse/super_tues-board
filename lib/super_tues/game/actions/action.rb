@@ -53,11 +53,15 @@ module SuperTues
 
         def perform(board)
           raise NotImplementedError
-        end
+        end       
 
       private
         def self.event_klass(name)
           "SuperTues::Game::Actions::#{name.to_s.camelcase}".constantize
+        end
+
+        def pass?(method, rules)
+          send method, rules
         end
       end
 

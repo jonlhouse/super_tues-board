@@ -19,6 +19,7 @@ module SuperTues
         end
         raise UnknownKey, str
       end
+      alias_method :[], :rule
 
       def self.default
         @default ||= RuleSet.default

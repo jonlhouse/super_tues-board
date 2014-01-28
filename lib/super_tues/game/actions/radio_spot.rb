@@ -15,9 +15,9 @@ module SuperTues
         end
 
         def allowed?(rules)
-          more_than_zero_picks &&
-          less_than_max_picks(rules) &&
-          (spread? ? spread_allowed?(rules) : true)  # check only if spread
+          raise ArgumentError, "must be a Rules" unless rules.is_a? Rules
+          tests = [:more_than_zero_picks?, :less_than_max_picks?, :spread_allowed?]
+          tests.all? { |test| pass?(test, rules) }
         end
 
         def spread?
@@ -34,16 +34,16 @@ module SuperTues
 
       private
 
-        def more_than_zero_picks
+        def more_than_zero_picks?(rules)
           total_picks > 0
         end
 
-        def less_than_max_picks(rules)
+        def less_than_max_picks?(rules)
           total_picks <= rules['action.radio_spot.picks.max']
         end
 
         def spread_allowed?(rules)
-          rules['action.radio_spot.picks.spread']
+          spread? ? rules['action.radio_spot.picks.spread'] : true
         end
 
       end

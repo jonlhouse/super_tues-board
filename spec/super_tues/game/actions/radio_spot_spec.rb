@@ -18,10 +18,17 @@ module SuperTues
             it "> max picks" do
               RadioSpot.new('Florida' => 6).allowed?(rules).should be_false
             end
+            it "spread states when rules forbid" do
+              new_rules = rules.ammend 'action.radio_spot.picks.spread', false
+              RadioSpot.new('Florida' => 1, 'Indiana' => 1).allowed?(new_rules).should be_false
+            end
           end
           context "true when" do
             it "<= max picks" do
               RadioSpot.new('Florida' => 5).allowed?(rules).should be_true
+            end
+            it "spead state by default" do
+              RadioSpot.new('Florida' => 1, 'Indiana' => 1).allowed?(rules).should be_true
             end
           end         
         end
