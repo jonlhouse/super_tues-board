@@ -9,7 +9,7 @@ action:
       cost: { clout: 2 }
       max: 5
       spread: false
-  card:
+  play_card:
     max: 1
     cost: 'free'
   discard:
@@ -20,6 +20,8 @@ action:
     cost: 'free'
   move:
     distance: 1
+    cost: 'free'
+  pass:
     cost: 'free'
 player:
   actions_per_turn: 1
