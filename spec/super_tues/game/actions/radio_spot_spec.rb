@@ -22,6 +22,10 @@ module SuperTues
               new_rules = rules.ammend 'action.radio_spot.picks.spread', false
               RadioSpot.new('Florida' => 1, 'Indiana' => 1).allowed?(new_rules).should be_false
             end
+            it "forbidding from playing picks" do
+              new_rules = rules.ammend 'current_player.can_play_picks', false
+              RadioSpot.new('Florida' => 1).allowed?(new_rules).should be_false
+            end
           end
           context "true when" do
             it "<= max picks" do

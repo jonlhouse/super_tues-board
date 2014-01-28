@@ -15,7 +15,7 @@ module SuperTues
         rule_attr = args.shift
         @rules =  case rule_attr
                   when String
-                    build_from_string rule_attr, args.shift
+                    build_from_string rule_attr, try_convert(args.shift)
                   when Hash
                     raise ArgumentError, "Empty rules hash" if rule_attr.empty?
                     convert_values(rule_attr).with_indifferent_access
@@ -107,7 +107,7 @@ module SuperTues
       end
 
       def build_from_string(rule_str, value)
-        raise ArgumentError, "value (#{value}) must be present" unless value.present?
+        raise ArgumentError, "value (#{value}) must be present" unless defined?(value)
         keys = rule_str.split('.')
         last = nil
         @rules = {}.with_indifferent_access
