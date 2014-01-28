@@ -43,8 +43,8 @@ module SuperTues
           event_klass(attrs.shift).new attrs.extract_options!
         end
 
-        def allowed?(board)
-          raise NotImplementedError
+        def allowed?(rules)
+          all_must_pass.all? { |test| pass? test, rules }
         end
 
         def cost(board)
@@ -57,14 +57,25 @@ module SuperTues
 
       private
 
+        # Subclasses override these
+        def all_must_pass
+          []
+        end
+
         def self.event_klass(name)
           "SuperTues::Game::Actions::#{name.to_s.camelcase}".constantize
         end
 
         def pass?(method, rules)
-          send method, rules
+          if method =~ /^\w+(\.\w+)*$/
+            rules.player(method).tap do |res|
+              raise "#{method} and did not return boolean" unless res == true || res == false
+            end
+          else
+            send method, rules
+          end
         end
-        
+
       end
 
     end

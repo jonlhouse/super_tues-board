@@ -27,7 +27,7 @@ module SuperTues
 
           describe "#allowed?(board)" do
             specify { Action.new.should respond_to :allowed? }
-            specify { expect { Action.new.allowed?(board) }.to raise_error NotImplementedError }          
+            specify { Action.new.allowed?(nil).should be }
           end
         end
 

@@ -20,15 +20,10 @@ module SuperTues
           @cards.length
         end
 
-        def allowed?(rules)
-          tests = [:can_play_cards?, :lte_max_cards?]
-          tests.all? { |test| pass? test, rules }
-        end
-
       private
 
-        def can_play_cards?(rules)
-          rules.player('action.play_cards.allowed', default: true)
+        def all_must_pass
+          ['action.play_cards.allowed', :lte_max_cards?]
         end
 
         def lte_max_cards?(rules)

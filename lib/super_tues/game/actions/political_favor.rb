@@ -8,18 +8,17 @@ module SuperTues
           @state_picks = attrs
         end
 
-        def allowed?(rules)
-          tests = [:can_play_picks?, :more_than_zero_picks?, :less_than_max_picks?, :spread_allowed?]
-          tests.all? { |test| pass? test, rules}
-        end
-
       private
 
-        def more_than_zero_picks?(rules)
+        def all_must_pass
+          ['action.play_picks.allowed', :gt_zero_picks?, :lte_max_picks?, :spread_allowed?]
+        end
+
+        def gt_zero_picks?(rules)
           total_picks > 0
         end
 
-        def less_than_max_picks?(rules)
+        def lte_max_picks?(rules)
           total_picks <= rules.player('action.political_favor.picks.max')
         end
 

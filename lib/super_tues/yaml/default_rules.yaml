@@ -19,6 +19,7 @@ action:
     allowed: true
     max: 1
   poll:
+    allowed: true
     max: 1
   move:
     distance: 1

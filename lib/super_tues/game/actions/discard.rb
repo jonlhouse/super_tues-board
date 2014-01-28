@@ -16,19 +16,14 @@ module SuperTues
           @cards = Array.wrap(cards).flatten
         end
 
-        def allowed?(rules)
-          tests = [:can_discard?, :lte_max_cards?]
-          tests.all? { |test| pass? test, rules }
-        end
-
         def count
           @cards.length
         end
 
       private
 
-        def can_discard?(rules)
-          rules.player('action.discard.allowed')
+        def all_must_pass
+          ['action.discard.allowed', :lte_max_cards?]
         end
 
         def lte_max_cards?(rules)
