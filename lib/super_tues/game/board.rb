@@ -2,7 +2,7 @@ module SuperTues
   module Game
 
     class Board
-      attr_reader :players, :candidates, :states, :days, :cards, :news, :bills
+      attr_reader :players, :candidates, :states, :days, :cards, :news, :bills, :rules
 
       def initialize()
         @players = []        
@@ -49,7 +49,7 @@ module SuperTues
       end
 
       def allowed?(rule_str, value)
-        rules.allowed? rule_str, value
+        # rules.allowed? rule_str, value
       end
 
     private     

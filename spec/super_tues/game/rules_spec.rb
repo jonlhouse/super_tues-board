@@ -6,7 +6,7 @@ module SuperTues
     describe Rules do
 
       describe "default" do
-        specify { Rules.default.should be_a Rules }
+        specify { Rules.default.should be_a RuleSet }
       end
     end
 

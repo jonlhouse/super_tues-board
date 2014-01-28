@@ -5,7 +5,7 @@ module SuperTues
 
     describe RuleSet do
 
-      radio_spot_attrs = { actions: { radio_spot: { max_picks: 5 } } }
+      radio_spot_attrs = { action: { radio_spot: { picks: { max: 5 } } } }
       let(:radio_spot) { RuleSet.new(radio_spot_attrs) }
       let(:defaults) { RuleSet.default }
 
@@ -25,17 +25,6 @@ module SuperTues
       context "default ruleset" do
         specify { defaults.rules.should_not be_empty }
         specify { defaults.duration.should be RuleSet::PERMANENT }
-      end
-
-      describe ".dup" do
-        it "clones the underlying hash_set" do
-          copy = (original = RuleSet.new(radio_spot_attrs)).dup
-          # make sure it's copied
-          copy[:actions][:radio_spot][:max_picks].should == original[:actions][:radio_spot][:max_picks]
-          # not change it
-          copy[:actions][:radio_spot][:max_picks] = 42
-          original[:actions][:radio_spot][:max_picks].should_not == 42
-        end
       end
 
       describe "[]" do
@@ -96,7 +85,20 @@ module SuperTues
         specify { rset[:nil].should == nil }
       end
 
-      
+      describe ".dup" do
+        it "clones the underlying hash_set" do
+          copy = (original = RuleSet.new(radio_spot_attrs)).dup
+          copy['action.radio_spot.picks.max'].should == original['action.radio_spot.picks.max']
+          copy['action.radio_spot.picks.max'] = 42
+          original['action.radio_spot.picks.max'].should_not == 42
+          # make sure it's copied
+          # copy[:action][:radio_spot][:picks][:max].should == original[:action][:radio_spot][:picks][:max]
+          # # not change it
+          # copy[:action][:radio_spot][:picks][:max] = 42
+          # original[:actions][:radio_spot][:max_picks].should_not == 42
+        end
+      end
+
     end
 
   end

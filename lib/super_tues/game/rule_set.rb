@@ -3,8 +3,7 @@ module SuperTues
 
     class RuleSet
 
-      class UnknownKey < ArgumentError ; end
-      class RuleSetError < ArgumentError ; end
+      class UnknownRule < ArgumentError ; end
 
       PERMANENT = 'permanent'
 
@@ -12,17 +11,17 @@ module SuperTues
       attr_accessor :duration
 
       def initialize(rules_hash, duration: PERMANENT)
-        raise ArgumentError.new("Empty rules hash") if rules_hash.empty?
+        raise ArgumentError, "Empty rules hash" if rules_hash.empty?
         @rules = convert_values(rules_hash).with_indifferent_access
         self.duration = Integer(duration) rescue duration
       end
 
       def [](key, *default)
-        raise UnknownKey.new("#{key}") if (keys = key.to_s.split('.')).empty?
+        raise ArgumentError, "#{key}" if (keys = key.to_s.split('.')).empty?
 
         # raise exception unless rule lookup returns a string/bool/numeric/symbol
         traverse_keys(keys, default.pop).tap do |value|
-          raise RuleSetError.new "#{key} => #{value.inspect} not valid rule" if value.is_a? Enumerable
+          raise UnknownRule, "#{key} => #{value.inspect} not valid rule" if value.is_a? Enumerable
         end
       end
 
@@ -48,7 +47,7 @@ module SuperTues
             if block_given?
               yield hash, key
             else
-              raise UnknownKey.new "#{key}"
+              raise UnknownRule.new "#{key}"
             end
           end
         end
@@ -71,8 +70,8 @@ module SuperTues
       end
 
       def string_or_bool(value)
-        return true if ['true', 'TRUE', :true].include? value
-        return false if ['false', 'FALSE', :false].include? value
+        return true if ['true', 'TRUE', 'yes', 'YES', :true].include? value
+        return false if ['false', 'FALSE', 'no', 'NO', :false].include? value
         value
       end
 
