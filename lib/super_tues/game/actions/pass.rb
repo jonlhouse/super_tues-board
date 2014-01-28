@@ -6,6 +6,12 @@ module SuperTues
         def initialize(attrs = {})
           super
         end
+
+      private
+
+        def all_must_pass
+          []  # pass 
+        end
       end
 
     end
