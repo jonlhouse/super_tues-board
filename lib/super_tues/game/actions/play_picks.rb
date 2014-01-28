@@ -20,6 +20,12 @@ module SuperTues
           @state_picks.values.inject(0, :+)
         end
 
+      private
+
+        def can_play_picks?(rules)
+          rules.player('player.can_play_picks')
+        end
+
       end   
 
     end

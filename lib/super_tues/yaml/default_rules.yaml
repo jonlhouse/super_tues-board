@@ -26,3 +26,4 @@ action:
 player:
   actions_per_turn: 1
   can_play_picks: true
+  can_play_cards: true

@@ -14,6 +14,18 @@ module SuperTues
 
         describe "#allowed?(rules)" do
           let(:rules) { Board.new.rules }
+          context "true when" do
+            it "<= max picks" do
+              RadioSpot.new('Florida' => 5).allowed?(rules).should be_true
+            end
+            it "spead state by default" do
+              RadioSpot.new('Florida' => 1, 'Indiana' => 1).allowed?(rules).should be_true
+            end
+            it "someone else can't play picks" do
+              new_rules = rules.ammend 'player.can_play_picks', false, player: 'player-abc'
+              RadioSpot.new('Florida' => 1).allowed?(new_rules).should be_true
+            end
+          end
           context "false when" do
             it "> max picks" do
               RadioSpot.new('Florida' => 6).allowed?(rules).should be_false
@@ -26,19 +38,7 @@ module SuperTues
               new_rules = rules.ammend 'player.can_play_picks', false, player: :current
               RadioSpot.new('Florida' => 1).allowed?(new_rules).should be_false
             end
-          end
-          context "true when" do
-            it "<= max picks" do
-              RadioSpot.new('Florida' => 5).allowed?(rules).should be_true
-            end
-            it "spead state by default" do
-              RadioSpot.new('Florida' => 1, 'Indiana' => 1).allowed?(rules).should be_true
-            end
-            it "someone else can't play picks" do
-              new_rules = rules.ammend 'player.can_play_picks', false, player: 'player-abc'
-              RadioSpot.new('Florida' => 1).allowed?(new_rules).should be_false
-            end
-          end
+          end          
         end
       end
     end

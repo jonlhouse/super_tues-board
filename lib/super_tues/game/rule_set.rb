@@ -8,7 +8,7 @@ module SuperTues
       attr_reader :rules
       attr_accessor :duration
 
-      def initialize(*args, duration: :permanent, affects: :any, **opts)
+      def initialize(*args, duration: :permanent, player: :any, **opts)
         args = [opts] if args.empty?
         rule_attr = args.shift
         @rules =  case rule_attr
@@ -20,7 +20,7 @@ module SuperTues
                   when RuleSet
                     rules_attrs.deep_dup
                   end
-        @affects = Array.wrap(affects).map(&:to_s)
+        @affects = Array.wrap(player).map(&:to_s)
         self.duration = Integer(duration) rescue duration
       end
 
@@ -55,7 +55,7 @@ module SuperTues
         # raise exception unless rule lookup returns a string/bool/numeric/symbol
         traverse_keys(keys, default).tap do |value|
           raise UnknownRule, "#{key} => #{value.inspect} not valid rule" if value.is_a? Enumerable
-        end
+        end        
       end
 
       def []=(key, value)

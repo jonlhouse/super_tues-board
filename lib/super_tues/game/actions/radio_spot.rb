@@ -26,11 +26,11 @@ module SuperTues
         end
 
         def less_than_max_picks?(rules)
-          total_picks <= rules['action.radio_spot.picks.max']
+          total_picks <= rules.player('action.radio_spot.picks.max')
         end
 
         def spread_allowed?(rules)
-          spread? ? rules['action.radio_spot.picks.spread'] : true
+          spread? ? rules.player('action.radio_spot.picks.spread') : true
         end
 
       end

@@ -17,6 +17,13 @@ module SuperTues
           context "true when" do
             specify { PlayCard.new(card).allowed?(rules).should be }
           end
+          context "false when" do
+            specify { 
+              # rules.ammend 'player.can_play_picks', false, player: :current
+              new_rules = rules.ammend 'player.can_play_cards', false, player: :current
+              PlayCard.new(card).allowed?(new_rules).should_not be 
+            }
+          end
         end
       end
     end

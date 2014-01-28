@@ -22,7 +22,7 @@ module SuperTues
       private
 
         def can_play_cards?(rules)
-          rules['player.can_play_card', true, player: :current]
+          rules.player('player.can_play_cards', default: true)
         end
       end
 

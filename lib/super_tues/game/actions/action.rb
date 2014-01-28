@@ -64,10 +64,7 @@ module SuperTues
         def pass?(method, rules)
           send method, rules
         end
-
-        def can_play_picks?(rules)
-          rules['player.can_play_picks', player: :current]
-        end
+        
       end
 
     end

@@ -27,7 +27,7 @@ module SuperTues
             rset = RuleSet.new('some.rule', 42).instance_variable_get(:@affects).should == ['any']
           end
           it "is overridable" do
-            rset = RuleSet.new('some.rule', 42, affects: ['player_1']).instance_variable_get(:@affects).should == ['player_1']
+            rset = RuleSet.new('some.rule', 42, player: ['player_1']).instance_variable_get(:@affects).should == ['player_1']
           end
         end
 
@@ -50,8 +50,8 @@ module SuperTues
       end
 
       describe "affects?" do
-        let(:select_rule) { RuleSet.new('some.rule', 42, affects: ['player_1', 'player_2']) }
-        let(:global_rule) { RuleSet.new('some.rule', 42, affects: :any) }
+        let(:select_rule) { RuleSet.new('some.rule', 42, player: ['player_1', 'player_2']) }
+        let(:global_rule) { RuleSet.new('some.rule', 42, player: :any) }
 
         specify { select_rule.affects?('player_1').should be }
         specify { select_rule.affects?('player_5').should_not be }
@@ -78,18 +78,19 @@ module SuperTues
           fail_keys.each do |key|
             specify { expect { rset[key] }.to raise_error }
           end
-
-          describe "exception not thrown if default given" do
-            legal_not_present_keys = ['other.bad', 'made.up', 'fail']
-            legal_not_present_keys.each do |key|
-              specify { expect { rset[key, default: 'some_default'].should == 'some_default' }.to_not raise_error }
-            end
-            it "allows a false default value" do
-              rset['made.up.key', default: false].should == false
-            end
-            it "raises when default is false" do
-              expect { rset['made.up.key', default: nil] }.to raise_error
-            end
+        end
+        context "with default values" do
+          ['other.bad', 'made.up', 'fail'].each do |key|
+            specify { expect { rset[key, default: 'some_default'].should == 'some_default' }.to_not raise_error }
+          end
+          it "allows a false default value" do
+            rset['made.up.key', default: false].should == false
+          end
+          it "raises when default is false" do
+            expect { rset['made.up.key', default: nil] }.to raise_error
+          end
+          it "don't 'cover-up' real values" do
+            rset['this', default: 'made-up'].should == :that
           end
         end        
       end

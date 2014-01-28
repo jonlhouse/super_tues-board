@@ -18,6 +18,11 @@ module SuperTues
         init_days
       end
 
+      # PLACEHOLDER
+      def current_player
+        'player-0'
+      end
+
       def add_players(*player_names)
         players.concat player_names.map{ |name| Player.new(name, self) }
       end

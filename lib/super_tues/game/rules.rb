@@ -46,6 +46,12 @@ module SuperTues
       end        
       alias_method :[], :rule
 
+      # Returns the rule for the current_player
+      #
+      def player(rule_str, default: nil)
+        rule(rule_str, player: @board.current_player, default: default)
+      end
+
       # Ammends a rule set to the rule_heirarchy.
       #      
       # It creates a new rule_set with an optional duration and prepends
@@ -81,8 +87,8 @@ module SuperTues
       #  options[:affects] with board.current_player when set to :current_player.
       def replace_current_player(args)        
         if args.length > 1 && args.last.is_a?(Hash) and
-           (args.last[:affects] == :current || args.last[:affect] == :current_player)
-          args.last[:affects] = @board.current_player
+           (args.last[:player] == :current || args.last[:player] == :current_player)
+          args.last[:player] = @board.current_player
         end
         args
       end

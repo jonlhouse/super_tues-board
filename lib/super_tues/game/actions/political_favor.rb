@@ -20,11 +20,11 @@ module SuperTues
         end
 
         def less_than_max_picks?(rules)
-          total_picks <= rules['action.political_favor.picks.max']
+          total_picks <= rules.player('action.political_favor.picks.max')
         end
 
         def spread_allowed?(rules)
-          spread? ? rules['action.political_favor.picks.spread'] : true
+          spread? ? rules.player('action.political_favor.picks.spread') : true
         end
 
       end
