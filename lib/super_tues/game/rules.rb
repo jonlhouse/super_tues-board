@@ -27,14 +27,14 @@ module SuperTues
       #  the rule to the heirarchy.
       #
       def ammend(*args)
-        @rule_heirarchy.unshift RuleSet.new(args)
+        @rule_heirarchy.unshift RuleSet.new(*args)
         self
       end
 
       # Returns the remaining time on the active rule accessed via the rule_str.
       #  Note: returns 'permanent' in the case where the duration is indefinite.
       def duration(rule_str)
-
+        active(rule_str).duration # note raises when key not found in any rule_set
       end
 
       def self.default

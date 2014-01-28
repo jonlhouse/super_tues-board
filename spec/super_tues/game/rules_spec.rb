@@ -20,6 +20,12 @@ module SuperTues
         end
       end
 
+      describe "#duration" do
+        context "when defaults" do
+          specify { default.duration('action.radio_spot.picks.max').should == RuleSet::PERMANENT }
+        end
+      end
+
       describe "#ammend" do
         context "with (rule_str, value, duration: dur)" do
           it "should return self" do
@@ -27,7 +33,7 @@ module SuperTues
           end
           it "should should default to permanent change" do
             default.ammend('some.new.rule', '42')
-            default.duration('some.new.rule').permanent?.should be_true
+            default.duration('some.new.rule').should == RuleSet::PERMANENT
           end
           it "should allow specifying the duration" do
             default.ammend('some.new.rule', '42', duration: 1)
