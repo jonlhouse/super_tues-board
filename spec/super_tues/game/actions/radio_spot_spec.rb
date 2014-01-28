@@ -9,14 +9,14 @@ module SuperTues
         describe "#initialize(params)" do
           attrs = { 'Indiana' => 1, 'Florida' => 3, 'South Dakoda' => 1 }
           radio_spot = RadioSpot.new attrs
-          radio_spot.instance_variable_get(:@picks).should == attrs
+          radio_spot.instance_variable_get(:@state_picks).should == attrs
         end
 
-        describe "#allow?(rules)" do
+        describe "#allowed?(rules)" do
           let(:rules) { Board.new.rules }
           context "false when" do
             it "> max picks" do
-              RadioSpot.new(picks: { 'Florida' => 6 }).allowed?(rules).should be_false
+              RadioSpot.new('Florida' => 6).allowed?(rules).should be_false
             end
           end
           context "true when" do
