@@ -63,6 +63,16 @@ module SuperTues
         end        
       end
 
+      describe "has?(key)" do
+        let(:rset) { RuleSet.new({ this: :that, other: { foo: :bar } }) }
+        let(:has) { ['this', 'other.foo'] }
+        let(:has_not) { ['fail', 'foo.fail', 'foo.'] }
+        let(:exception) { ['', nil, []] }
+        specify { has.each { |key| rset.has?(key).should be_true } }
+        specify { has_not.each { |key| rset.has?(key).should be_false } }
+        specify { exception.each { |key| expect { rset.has?(key) }.to raise_error } }
+      end
+
       describe "[]=" do
         let(:rset) { RuleSet.new({ this: :that, other: { foo: :bar } }) }
         it "can change existing values" do

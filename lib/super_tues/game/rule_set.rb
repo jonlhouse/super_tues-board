@@ -49,6 +49,12 @@ module SuperTues
         last_hash[last_key] = try_convert value
       end
 
+      # Return true if :[] returns w/o exception, false otherwise
+      def has?(rule_str)
+        raise ArgumentError, "#{rule_str.inspect} not valid rule string" if rule_str.empty?
+        self[rule_str] || true rescue false
+      end
+
       def traverse_keys(keys, default = nil, &block)
         return rules if keys.empty?
         keys.inject(rules) do |hash, key|
