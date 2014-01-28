@@ -49,11 +49,11 @@ module SuperTues
         end
       end
 
-      def [](key, *default)
+      def [](key, default: nil)
         raise ArgumentError, "#{key}" if (keys = key.to_s.split('.')).empty?
 
         # raise exception unless rule lookup returns a string/bool/numeric/symbol
-        traverse_keys(keys, default.pop).tap do |value|
+        traverse_keys(keys, default).tap do |value|
           raise UnknownRule, "#{key} => #{value.inspect} not valid rule" if value.is_a? Enumerable
         end
       end
@@ -72,16 +72,22 @@ module SuperTues
       # Return true if :[] returns w/o exception, false otherwise
       def has?(rule_str)
         raise ArgumentError, "#{rule_str.inspect} not valid rule string" if rule_str.empty?
-        self[rule_str] || true rescue false
+        !!self[rule_str] rescue false
       end
+     
+      def self.default
+        @default_rules ||= load_rules_from_yaml('default_rules')
+      end
+      
+    private
 
       def traverse_keys(keys, default = nil, &block)
         return rules if keys.empty?
         keys.inject(rules) do |hash, key|
           if hash.has_key? key
             hash[key]
-          elsif default
-            default
+          elsif default != nil  # allow false as a default
+            return default      # key not found -- abort with default
           else
             if block_given?
               yield hash, key
@@ -91,12 +97,6 @@ module SuperTues
           end
         end
       end
-
-      def self.default
-        @default_rules ||= load_rules_from_yaml('default_rules')
-      end
-      
-    private
 
       def convert_values(hash)
         deep_transform_values hash do |value|

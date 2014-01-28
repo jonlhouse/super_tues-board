@@ -80,8 +80,15 @@ module SuperTues
           end
 
           describe "exception not thrown if default given" do
-            fail_keys.each do |key|
-              specify { expect { rset[key, 'some_default'].should == 'some_default' } }
+            legal_not_present_keys = ['other.bad', 'made.up', 'fail']
+            legal_not_present_keys.each do |key|
+              specify { expect { rset[key, default: 'some_default'].should == 'some_default' }.to_not raise_error }
+            end
+            it "allows a false default value" do
+              rset['made.up.key', default: false].should == false
+            end
+            it "raises when default is false" do
+              expect { rset['made.up.key', default: nil] }.to raise_error
             end
           end
         end        
