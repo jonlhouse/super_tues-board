@@ -17,6 +17,10 @@ module SuperTues
       end
 
 
+      def fobidden_name
+        %w(any all current current_player)
+      end
+
     end
 
   end

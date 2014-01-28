@@ -51,7 +51,7 @@ module SuperTues
           specify { default['player.can_play_picks'].should be_true }
         end
         context "when overriden" do
-          let(:ammended) { default.ammend('player.can_play_picks', false, affects: :current_player) }
+          let(:ammended) { default.ammend('player.can_play_picks', false, affects: :current) }
           specify { ammended['player.can_play_picks', player: board.current_player].should_not be_true }
           specify { ammended['player.can_play_picks', player: 'another-player'].should be_true }
         end

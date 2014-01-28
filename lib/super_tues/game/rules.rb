@@ -81,7 +81,7 @@ module SuperTues
       #  options[:affects] with board.current_player when set to :current_player.
       def replace_current_player(args)        
         if args.length > 1 && args.last.is_a?(Hash) and
-           args.last[:affects] == :current_player
+           (args.last[:affects] == :current || args.last[:affect] == :current_player)
           args.last[:affects] = @board.current_player
         end
         args

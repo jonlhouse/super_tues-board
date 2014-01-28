@@ -16,7 +16,7 @@ module SuperTues
 
         def allowed?(rules)
           raise ArgumentError, "must be a Rules" unless rules.is_a? Rules
-          tests = [:more_than_zero_picks?, :less_than_max_picks?, :spread_allowed?]
+          tests = [:can_play_picks?, :more_than_zero_picks?, :less_than_max_picks?, :spread_allowed?]
           tests.all? { |test| pass?(test, rules) }
         end
 
