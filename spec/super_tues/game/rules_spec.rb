@@ -13,8 +13,7 @@ module SuperTues
 
       describe "rule(str)" do        
         # check using default rule: action.radio_spot.picks.max
-        specify { expect( default.rule('action.radio_spot.picks.max') ).to be == 5 }
-        
+        specify { expect( default.rule('action.radio_spot.picks.max') ).to be == 5 }        
 
         describe "#[] is alias for rule(str)" do
           specify { expect( default['action.radio_spot.picks.max'] ).to be == 5 }
@@ -23,7 +22,7 @@ module SuperTues
 
       describe "#duration" do
         context "when defaults" do
-          specify { default.duration('action.radio_spot.picks.max').should == RuleSet::PERMANENT }
+          specify { default.duration('action.radio_spot.picks.max').should == :permanent }
         end
       end
 
@@ -34,20 +33,28 @@ module SuperTues
           end
           it "should should default to permanent change" do
             default.ammend('some.new.rule', '42')
-            default.duration('some.new.rule').should == RuleSet::PERMANENT
+            default.duration('some.new.rule').should == :permanent
           end
           it "should allow specifying the duration" do
             default.ammend('some.new.rule', '42', duration: 1)
             default.duration('some.new.rule').should == 1
+          end
+          it "affects :any player by default" do
+            default.ammend('some.new.rule', '42')
+            default.instance_variable_get(:@rule_heirarchy).first.affects?(:any).should be_true
           end
         end
       end
 
       describe "current_player rules" do
         context "when no override" do
-          specify { default['current_player.can_play_picks'].should be_true }
+          specify { default['player.can_play_picks'].should be_true }
         end
-
+        context "when overriden" do
+          let(:ammended) { default.ammend('player.can_play_picks', false, affects: :current_player) }
+          specify { ammended['player.can_play_picks', player: board.current_player].should_not be_true }
+          specify { ammended['player.can_play_picks', player: 'another-player'].should be_true }
+        end
       end
 
     end

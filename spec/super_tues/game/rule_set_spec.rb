@@ -23,8 +23,8 @@ module SuperTues
         end        
 
         describe ":player option" do
-          it "is :all by default" do
-            rset = RuleSet.new('some.rule', 42).instance_variable_get(:@affects).should == ['all']
+          it "is :any by default" do
+            rset = RuleSet.new('some.rule', 42).instance_variable_get(:@affects).should == ['any']
           end
           it "is overridable" do
             rset = RuleSet.new('some.rule', 42, affects: ['player_1']).instance_variable_get(:@affects).should == ['player_1']
@@ -51,7 +51,7 @@ module SuperTues
 
       describe "affects?" do
         let(:select_rule) { RuleSet.new('some.rule', 42, affects: ['player_1', 'player_2']) }
-        let(:global_rule) { RuleSet.new('some.rule', 42, affects: :all) }
+        let(:global_rule) { RuleSet.new('some.rule', 42, affects: :any) }
 
         specify { select_rule.affects?('player_1').should be }
         specify { select_rule.affects?('player_5').should_not be }
@@ -135,11 +135,6 @@ module SuperTues
           copy['action.radio_spot.picks.max'].should == original['action.radio_spot.picks.max']
           copy['action.radio_spot.picks.max'] = 42
           original['action.radio_spot.picks.max'].should_not == 42
-          # make sure it's copied
-          # copy[:action][:radio_spot][:picks][:max].should == original[:action][:radio_spot][:picks][:max]
-          # # not change it
-          # copy[:action][:radio_spot][:picks][:max] = 42
-          # original[:actions][:radio_spot][:max_picks].should_not == 42
         end
       end
 

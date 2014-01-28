@@ -33,15 +33,17 @@ module SuperTues
       # Returns the current value for the rule-string given.
       #
       # This function is heirarchy aware so only the most current rule_set
-      #  value is computed and returned.
-      def rule(rule_str)
-        # allows_current_player_rules(rule_str) do |str|
-          @rule_heirarchy.each do |rule_set|
-            return rule_set[str] rescue next
-          end
-          raise UnknownKey, str
-        end        
-      # end
+      #  value is computed and returned.  It also passes the current user 
+      #  to the rule so player specific rules can be returned.
+      def rule(rule_str, player: :any)
+        @rule_heirarchy.each do |rule_set|
+          # check rule unless it doesn't apply to player
+          next unless rule_set.affects? player
+          # lookup rule -- move to next if rule not found
+          return rule_set[rule_str] rescue next
+        end
+        raise RuleSet::UnknownKey, rule_str
+      end        
       alias_method :[], :rule
 
       # Ammends a rule set to the rule_heirarchy.
@@ -49,8 +51,8 @@ module SuperTues
       # It creates a new rule_set with an optional duration and prepends
       #  the rule to the heirarchy.
       #
-      def ammend(*args)
-        @rule_heirarchy.unshift RuleSet.new(*args)
+      def ammend(*args)        
+        @rule_heirarchy.unshift RuleSet.new(*replace_current_player(args))
         self
       end
 
@@ -75,9 +77,14 @@ module SuperTues
         @rule_heirarchy.find { |rule_set| rule_set.has?(str) }
       end
 
-      # Performs rule manipulation with 'current_player' substitution.
-      #
-      def allows_current_player_rules(rule_str)
+      # Given an argument array of rules<, value<, options>> replace the
+      #  options[:affects] with board.current_player when set to :current_player.
+      def replace_current_player(args)        
+        if args.length > 1 && args.last.is_a?(Hash) and
+           args.last[:affects] == :current_player
+          args.last[:affects] = @board.current_player
+        end
+        args
       end
 
       def current_player_rule?(str)

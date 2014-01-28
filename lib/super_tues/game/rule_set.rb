@@ -8,7 +8,7 @@ module SuperTues
       attr_reader :rules
       attr_accessor :duration
 
-      def initialize(*args, duration: :permanent, affects: :all, **opts)
+      def initialize(*args, duration: :permanent, affects: :any, **opts)
         args = [opts] if args.empty?
         rule_attr = args.shift
         @rules =  case rule_attr
@@ -42,7 +42,7 @@ module SuperTues
       #  global_rule.affects?(:all)        #=> true
       #
       def affects?(whom = :any)
-        if @affects == ['all']
+        if @affects == ['any']
           true
         else
           @affects.include? whom.to_s
