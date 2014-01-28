@@ -23,7 +23,7 @@ module SuperTues
 
         describe "can take a single rule string and value" do
           let(:single_rule) { RuleSet.new 'some.made.up.rule', '42' }
-          specify { single_rule.rules.should == { 'some' => { 'made' => { 'up' => { 'rule' => '42' } } } } }
+          specify { single_rule.rules.should == { 'some' => { 'made' => { 'up' => { 'rule' => 42 } } } } }
         end
       end
 

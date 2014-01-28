@@ -12,7 +12,7 @@ module SuperTues
         @cards = CardDeck.new
         @news = NewsDeck.new
         @bills = BillDeck.new
-        @rules = Rules.new
+        @rules = Rules.new(self)
         @turn = 1
         init_states
         init_days

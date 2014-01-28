@@ -4,11 +4,12 @@ module SuperTues
   module Game
 
     describe Rules do
+      let(:board) { double(current_player: 'player-0').as_null_object }
       describe "default" do
         specify { Rules.default.should be_a RuleSet }
       end 
 
-      let(:default) { Rules.new }
+      let(:default) { Rules.new(board) }
 
       describe "rule(str)" do        
         # check using default rule: action.radio_spot.picks.max
@@ -41,6 +42,14 @@ module SuperTues
           end
         end
       end
+
+      describe "current_player rules" do
+        context "when no override" do
+          specify { default['current_player.can_play_picks'].should be_true }
+        end
+
+      end
+
     end
 
   end
