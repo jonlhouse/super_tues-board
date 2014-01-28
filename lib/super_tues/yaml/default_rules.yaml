@@ -15,13 +15,11 @@ action:
   play_cards:
     allowed: true
     max: 1
-    cost: 'free'
   discard:
+    allowed: true
     max: 1
-    cost: 'free'
   poll:
     max: 1
-    cost: 'free'
   move:
     distance: 1
     cost: 'free'
