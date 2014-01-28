@@ -10,9 +10,18 @@ module SuperTues
       attr_reader :rules
       attr_accessor :duration
 
-      def initialize(rules_hash, duration: PERMANENT)
-        raise ArgumentError, "Empty rules hash" if rules_hash.empty?
-        @rules = convert_values(rules_hash).with_indifferent_access
+      def initialize(*args, duration: PERMANENT, **opts)
+        args = [opts] if args.empty?
+        rule_attr = args.shift
+        @rules =  case rule_attr
+                  when String
+                    build_from_string rule_attr, args.shift
+                  when Hash
+                    raise ArgumentError, "Empty rules hash" if rule_attr.empty?
+                    convert_values(rule_attr).with_indifferent_access
+                  when RuleSet
+                    rules_attrs.deep_dup
+                  end
         self.duration = Integer(duration) rescue duration
       end
 
@@ -89,6 +98,21 @@ module SuperTues
 
       def initialize_copy(other)
         @rules = other.rules.deep_dup
+      end
+
+      def build_from_string(rule_str, value)
+        raise ArgumentError, "value (#{value}) must be present" unless value.present?
+        keys = rule_str.split('.')
+        last = nil
+        @rules = {}.with_indifferent_access
+
+        keys.inject(rules) do |hash,key|
+          last = hash
+          hash[key] = {}
+          hash[key]
+        end
+        last[keys.last] = value
+        @rules
       end
 
       def self.load_rules_from_yaml(fname)

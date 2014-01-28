@@ -20,6 +20,11 @@ module SuperTues
           rset.duration.should == 1
         end
         specify { expect { RuleSet.new({}) }.to raise_error }
+
+        describe "can take a single rule string and value" do
+          let(:single_rule) { RuleSet.new 'some.made.up.rule', '42' }
+          specify { single_rule.rules.should == { 'some' => { 'made' => { 'up' => { 'rule' => '42' } } } } }
+        end
       end
 
       context "default ruleset" do
