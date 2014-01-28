@@ -5,7 +5,7 @@ module SuperTues
     module Actions
 
       describe PoliticalFavor do
-        specify { PoliticalFavor.should < Action }
+        specify { PoliticalFavor.should < PlayPicks }
 
         describe "#initialize(params)" do
           attrs = { 'Iowa' => 5 }

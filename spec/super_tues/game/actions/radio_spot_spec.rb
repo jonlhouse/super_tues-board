@@ -4,7 +4,7 @@ module SuperTues
   module Game
     module Actions
       describe RadioSpot do
-        specify { RadioSpot.should < Action }
+        specify { RadioSpot.should < PlayPicks }
 
         describe "#initialize(params)" do
           attrs = { 'Indiana' => 1, 'Florida' => 3, 'South Dakoda' => 1 }

@@ -2,7 +2,7 @@ module SuperTues
   module Game
     module Actions
 
-      class PoliticalFavor < Action
+      class PoliticalFavor < PlayPicks
         def initialize(attrs = {})
           super(attrs)
           @state_picks = attrs
@@ -20,7 +20,11 @@ module SuperTues
         end
 
         def less_than_max_picks?(rules)
-          total_picks <= rules['action.radio_spot.picks.max']
+          total_picks <= rules['action.political_favor.picks.max']
+        end
+
+        def spread_allowed?(rules)
+          spread? ? rules['action.political_favor.picks.spread'] : true
         end
 
       end
