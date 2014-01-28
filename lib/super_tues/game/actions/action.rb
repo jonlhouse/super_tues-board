@@ -21,9 +21,14 @@ module SuperTues
       # Actions will be performed by the board, after the player submits the action.
       #  
       # Example:
-      #   player.submit radio_spot
-      #   ...
-      #   board.perform radio_spot
+      #   * current_player.submit action
+      #   * board.perform action
+      #     * board.rules.allow? action
+      #       * action.allowed? rules
+      #     * action.allow?(board.rules) or fail
+      #     * board.current_player.can_afford? action.cost or fail
+      #     * board.current_player.deduct action.cost
+      #     * action.perform(board)
       #
       # It is the responsibility of the Action subclasses to define:
       #   allowed?(board) -- given the current board state and rules is this action allowed?
@@ -38,7 +43,7 @@ module SuperTues
           event_klass(attrs.shift).new attrs.extract_options!
         end
 
-        def perform(board)
+        def allowed?(board)
           raise NotImplementedError
         end
 
@@ -46,7 +51,7 @@ module SuperTues
           raise NotImplementedError
         end
 
-        def allow?(board)
+        def perform(board)
           raise NotImplementedError
         end
 
