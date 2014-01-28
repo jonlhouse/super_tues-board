@@ -3,8 +3,9 @@ module SuperTues
     module Actions
 
       class Discard < Action
-        def initialize(attrs = {})
+        def initialize(card_or_cards)
           super
+          # @cards = Array.wrap(card_or_cards)
         end
       end
 

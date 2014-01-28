@@ -22,7 +22,7 @@ module SuperTues
               RadioSpot.new('Florida' => 1, 'Indiana' => 1).allowed?(rules).should be_true
             end
             it "someone else can't play picks" do
-              new_rules = rules.ammend 'player.can_play_picks', false, player: 'player-abc'
+              new_rules = rules.ammend 'action.play_picks.allowed', false, player: 'player-abc'
               RadioSpot.new('Florida' => 1).allowed?(new_rules).should be_true
             end
           end
@@ -35,7 +35,7 @@ module SuperTues
               RadioSpot.new('Florida' => 1, 'Indiana' => 1).allowed?(new_rules).should be_false
             end
             it "forbidden from playing picks" do
-              new_rules = rules.ammend 'player.can_play_picks', false, player: :current
+              new_rules = rules.ammend 'action.play_picks.allowed', false, player: :current
               RadioSpot.new('Florida' => 1).allowed?(new_rules).should be_false
             end
           end          

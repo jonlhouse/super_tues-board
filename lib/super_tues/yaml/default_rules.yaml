@@ -1,4 +1,7 @@
 action:
+  per_turn: 1
+  play_picks:
+    allowed: true
   radio_spot:
     picks:
       cost: { cash: 2 }
@@ -9,7 +12,8 @@ action:
       cost: { clout: 2 }
       max: 5
       spread: false
-  play_card:
+  play_cards:
+    allowed: true
     max: 1
     cost: 'free'
   discard:
@@ -23,7 +27,3 @@ action:
     cost: 'free'
   pass:
     cost: 'free'
-player:
-  actions_per_turn: 1
-  can_play_picks: true
-  can_play_cards: true

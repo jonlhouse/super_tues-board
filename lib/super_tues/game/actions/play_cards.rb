@@ -2,16 +2,16 @@ module SuperTues
   module Game
     module Actions
 
-      class PlayCard < Action
+      class PlayCards < Action
 
         # Creates a new play_card action.
         #
         # Usage:
         #   PlayCard.new(card)
         #
-        def initialize(card)
+        def initialize(card_or_cards)
           super
-          @card = card
+          @cards = Array.wrap(card_or_cards)
         end
 
         def allowed?(rules)
@@ -22,7 +22,7 @@ module SuperTues
       private
 
         def can_play_cards?(rules)
-          rules.player('player.can_play_cards', default: true)
+          rules.player('action.play_cards.allowed', default: true)
         end
       end
 

@@ -23,7 +23,7 @@ module SuperTues
       private
 
         def can_play_picks?(rules)
-          rules.player('player.can_play_picks')
+          rules.player('action.play_picks.allowed')
         end
 
       end   

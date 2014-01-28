@@ -52,12 +52,12 @@ module SuperTues
 
       describe "current_player rules" do
         context "when no override" do
-          specify { default['player.can_play_picks'].should be_true }
+          specify { default['action.play_picks.allowed'].should be_true }
         end
         context "when overriden" do
-          let(:ammended) { default.ammend('player.can_play_picks', false, player: :current) }
-          specify { ammended['player.can_play_picks', player: board.current_player].should_not be_true }
-          specify { ammended['player.can_play_picks', player: 'another-player'].should be_true }
+          let(:ammended) { default.ammend('action.play_picks.allowed', false, player: :current) }
+          specify { ammended['action.play_picks.allowed', player: board.current_player].should_not be_true }
+          specify { ammended['action.play_picks.allowed', player: 'another-player'].should be_true }
         end
       end
 
