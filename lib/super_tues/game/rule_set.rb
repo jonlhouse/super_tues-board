@@ -20,7 +20,7 @@ module SuperTues
                   when RuleSet
                     rules_attrs.deep_dup
                   end
-        @affects = Array.wrap(player).map(&:to_s)
+        @affects = Array.wrap(ensure_player(player)).map(&:to_s)
         self.duration = Integer(duration) rescue duration
       end
 
@@ -143,6 +143,15 @@ module SuperTues
 
       def self.load_rules_from_yaml(fname)
         self.new SuperTues::Game.load_yaml(fname).with_indifferent_access
+      end
+
+      # Allow conversion of :all to :any or similar lookups
+      def ensure_player(player)
+        if player == :all || player == 'all'
+          :any
+        else
+          player
+        end
       end
 
     end

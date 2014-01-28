@@ -59,6 +59,11 @@ module SuperTues
         specify { global_rule.affects?('player_1').should be }
         specify { global_rule.affects?('player_5').should be }
         specify { global_rule.affects?.should be }
+
+        it "can use :all in place of :any" do
+          rule = RuleSet.new('some.rule', 42, player: :all)
+          rule.affects?('anyone').should be_true
+        end
       end
 
       describe "[]" do

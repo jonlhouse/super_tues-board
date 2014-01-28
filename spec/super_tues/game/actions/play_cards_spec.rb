@@ -17,15 +17,18 @@ module SuperTues
           context "true when" do
             specify { PlayCards.new(card).allowed?(rules).should be }
             it "more than one card played when rules allow" do
-
+              new_rules = rules.ammend 'action.play_cards.max', 2, player: :all
+              PlayCards.new(card, card).allowed?(rules).should be
             end
           end
           context "false when" do
             specify { 
-              # rules.ammend 'player.can_play_picks', false, player: :current
               new_rules = rules.ammend 'action.play_cards.allowed', false, player: :current
               PlayCards.new(card).allowed?(new_rules).should_not be 
             }
+            it "more than one card played" do
+              PlayCards.new(card, card).allowed?(rules).should_not be
+            end
           end
         end
       end
