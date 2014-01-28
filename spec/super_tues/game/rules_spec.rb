@@ -18,6 +18,10 @@ module SuperTues
         describe "#[] is alias for rule(str)" do
           specify { expect( default['action.radio_spot.picks.max'] ).to be == 5 }
         end
+
+        it "allows defaults" do
+          default.rule('should.not.be.found', default: true).should be
+        end
       end
 
       describe "#duration" do

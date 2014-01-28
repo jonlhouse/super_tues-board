@@ -35,14 +35,14 @@ module SuperTues
       # This function is heirarchy aware so only the most current rule_set
       #  value is computed and returned.  It also passes the current user 
       #  to the rule so player specific rules can be returned.
-      def rule(rule_str, player: :any)
+      def rule(rule_str, player: :any, default: nil)
         @rule_heirarchy.each do |rule_set|
           # check rule unless it doesn't apply to player
           next unless rule_set.affects? player
           # lookup rule -- move to next if rule not found
-          return rule_set[rule_str] rescue next
+          return rule_set[rule_str, default: default] rescue next
         end
-        raise RuleSet::UnknownKey, rule_str
+        raise RuleSet::UnknownRule, rule_str
       end        
       alias_method :[], :rule
 
