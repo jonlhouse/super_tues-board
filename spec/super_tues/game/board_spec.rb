@@ -51,32 +51,81 @@ module SuperTues
             board.seat_taken?(0).should be_false
           end
         end
+        describe "#seats" do
+          it "returns a hash mapping seats to players" do
+            p1 = double(seat: 0).tap { |p| p.should_receive(:board=) }
+            p2 = double(seat: 1).tap { |p| p.should_receive(:board=) }
+            board.add_players p1, p2
+            board.seats.should == { 0 => p1, 1 => p2 }
+          end
+        end
+        describe "#seat_players" do
+          it "seats players" do
+            p1 = Player.new(name: 'p1')
+            p2 = Player.new(name: 'p2')
+            board.add_players p1, p2
+            seats = board.seat_players
+            seats.keys.sort.should == (0...2).to_a
+          end
+          
+        end
       end
 
       describe "setup" do
         let(:bob) { Player.new(name: 'bob') }
         let(:tom) { Player.new(name: 'tom') }
         let(:jim) { Player.new(name: 'jim') }
-        describe "adding players" do        
-          it "add players and updates player's board" do
-            board.add_players(bob, tom)
-            board.players.count.should == 2 
-            board.players.each { |player| player.board.should == board }          
+
+        describe "adding players" do          
+          describe "adding players" do        
+            it "add players and updates player's board" do
+              board.add_players(bob, tom)
+              board.players.count.should == 2 
+              board.players.each { |player| player.board.should == board }          
+            end
           end
         end
 
-        describe "picking candidates" do
+        describe "once players added" do
           before(:each) { board.add_players(bob, tom, jim) }
-          it "deals candidates to players" do
-            board.deal_candidates
-            board.players.each { |player| player.candidates_dealt.count.should == SuperTues::Game.config[:candidates_per_player] }
-          end 
 
-          it "candidates are unique" do
-            board.deal_candidates
-            dealt = board.players.map { |player| player.candidates_dealt }.flatten
-            dealt.length.should == dealt.uniq.length
+          describe "picking candidates" do
+            describe "#deal_candidates" do          
+              it "deals candidates to players" do
+                board.deal_candidates
+                board.players.each { |player| player.candidates_dealt.count.should == SuperTues::Game.config[:candidates_per_player] }
+              end 
+
+              it "candidates are unique" do
+                board.deal_candidates
+                dealt = board.players.map { |player| player.candidates_dealt }.flatten
+                dealt.length.should == dealt.uniq.length
+              end
+            end
+
+            describe "#candidate_available?" do
+              let(:a) { double }
+              it "true when" do
+                board.stub(:candidates) { [] }
+                board.candidate_available?(a).should be
+              end
+              it "false when" do
+                board.stub(:candidates) { [a] }
+                board.candidate_available?(a).should_not be
+              end
+            end
+
+            describe "#candidates_picked?" do
+              before(:each) { board.deal_candidates }
+
+              specify { board.candidates_picked?.should_not be }
+              it "true when all players have picked a candidate" do
+                board.players.each { |p| p.candidate = p.candidates_dealt.sample }
+                board.candidates_picked?.should be
+              end
+            end
           end
+
         end
       end
 

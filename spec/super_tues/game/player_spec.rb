@@ -29,6 +29,22 @@ module SuperTues
         specify { player.should respond_to :candidate }
       end
 
+      describe "#pick_candidate" do        
+        [:a, :b, :c, :d].each { |sym| let(sym) { double } }
+        before(:each) do
+          player.candidates_dealt = [a, b, c]
+          player.stub(:board) { double(candidate_available?: true) }
+        end
+        specify { player.candidate = a ; player.candidate.should == a }
+        it "raises IllegalCandidate when not in list dealt" do
+          expect { player.candidate = d }.to raise_error Player::IllegalCandidate
+        end
+        it "raises IllegalCandidate if it is taken" do
+          player.stub(:board) { double(candidate_available?: false) }
+          expect { player.candidate = :a }.to raise_error Player::IllegalCandidate
+        end
+      end
+
       let(:player) { Player.new(name: 'john', color: :green).tap { |p| p.board = board } }
 
       describe "#seat" do

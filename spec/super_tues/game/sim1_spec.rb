@@ -12,18 +12,21 @@ module SuperTues
 
       let(:board) { Board.new }
 
-      describe "during game setup" do
-        describe "assigns players to the board" do
-          it "seats players" do
-            board.seat player0
-            board.seat player1
-            board.seat player2
-            board.seat player3
-            board.seats.should == [player0, player1, player2, player3]
-          end
-          
-        end
+      # adding players to the game
+      before(:each) { board.add_players player0, player1, player2, player3 }
+      specify { board.players.should == [player0, player1, player2, player3] }
+
+      # seating players
+      before(:each) { board.seat_players }
+      specify { board.seats.keys.sort.should == (0..3).to_a }
+
+      # dealing candidates
+      it "deals candidates to players" do
+        board.players.each { |player| expect(player).to receive(:candidates_dealt=) }
+        board.deal_candidates
       end
+
+      before(:each) { board.deal_candidates }
     end
 
   end

@@ -11,8 +11,10 @@ module SuperTues
       class IllegalName < ArgumentError ; end
       class NotAtGame < StandardError ; end
       class IllegalSeat < ArgumentError ; end
+      class IllegalCandidate < ArgumentError ; end
 
-      attr_accessor :name, :color, :board, :seat, :candidate, :candidates_dealt
+      attr_accessor :name, :color, :board, :seat, :candidates_dealt
+      attr_reader :candidate
 
       def initialize(attrs)
         self.name = ensure_name(attrs[:name])     
@@ -21,12 +23,10 @@ module SuperTues
         self.candidates_dealt = []
       end
 
-      def self.name_forbidden?(test_name)
-        test_name.blank? || forbidden_names.include?(test_name)
-      end
-
-      def self.name_allowed?(test_name)
-        not name_forbidden?(test_name)
+      def candidate=(picked)
+        raise IllegalCandidate, "#{picked} not in #{candidates_dealt}" unless candidate_dealt?(picked)
+        raise IllegalCandidate, "#{picked} already picked" unless board.candidate_available?(picked)
+        @candidate = picked
       end
 
       def seat=(index)
@@ -40,7 +40,23 @@ module SuperTues
         name
       end
 
+      def inspect
+        "#<Player #{name}: color: #{color}, seat: #{seat}>"
+      end
+
+      def self.name_forbidden?(test_name)
+        test_name.blank? || forbidden_names.include?(test_name)
+      end
+
+      def self.name_allowed?(test_name)
+        not name_forbidden?(test_name)
+      end
+
     private
+
+      def candidate_dealt?(which)
+        candidates_dealt.include? which
+      end
 
       def self.forbidden_names
         %w(any all current current_player other others)
