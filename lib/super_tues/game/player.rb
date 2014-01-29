@@ -36,6 +36,11 @@ module SuperTues
         @seat = index
       end
 
+      def seed_funds
+        raise IllegalCandidate, "must select a candidate" unless candidate
+        puts SuperTues::Game.config
+      end
+
       def to_s
         name
       end

@@ -21,12 +21,18 @@ module SuperTues
       specify { board.seats.keys.sort.should == (0..3).to_a }
 
       # dealing candidates
+      before(:each) { board.deal_candidates }
       it "deals candidates to players" do
         board.players.each { |player| expect(player).to receive(:candidates_dealt=) }
         board.deal_candidates
       end
 
-      before(:each) { board.deal_candidates }
+      # picking candidates
+      before(:each) { board.players.each { |player| player.candidate = player.candidates_dealt.sample } }
+      specify { board.candidates_picked?.should be }
+
+      # 
+
     end
 
   end

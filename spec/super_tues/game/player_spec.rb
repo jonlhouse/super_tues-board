@@ -66,7 +66,24 @@ module SuperTues
           player.seat.should == 0
         end
       end
-    end
 
+      describe "funds" do
+        specify { player.cash = Cash.new(5) ; player.cash.should == 5 }
+        specify { player.clout = Clout.new(5) ; player.clout.should == 5 }
+        specify { player.cards = [c = Card.new] ; player.cards.should == [c] }
+      end
+
+      describe "#seed_funds" do
+        it "raises error unless candidate is picked" do
+          expect { player.candidate = nil ; player.seed_funds }.to raise_error
+        end
+        describe "adds cash, clout and cards to player's funds" do
+          specify { expect { player.seed_funds }.to change(:cast) }
+          specify { expect { player.seed_funds }.to change(:clout) }
+          specify { expect { player.seed_funds }.to change(:cards) }
+        end
+      end
+
+    end
   end 
 end

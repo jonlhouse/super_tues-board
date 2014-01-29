@@ -126,8 +126,25 @@ module SuperTues
             end
           end
 
-        end
-      end
+          describe "#seed_player_funds" do
+            it "calls #seed_funds for each player" do
+              board.players.each { |player| player.should_receive :seed_funds }
+              board.send('seed_player_funds')
+            end
+          end
+
+          describe "#start_game" do
+            it "following initializing methods are called" do
+              board.should_receive :seat_players
+              board.should_receive :seed_player_funds
+              board.should_receive :reset_state_bins
+              board.should_receive :add_home_state_picks
+              board.start_game
+            end
+          end
+
+        end  # once players added
+      end   # setup
 
       describe "rules" do
         describe "querying rules" do          

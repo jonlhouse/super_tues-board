@@ -54,6 +54,20 @@ module SuperTues
         end
       end
 
+      # Set the initial start of the game.
+      #
+      # Should set:
+      #   * player seats
+      #   * player starting funds
+      #   * reset state bins
+      #
+      def start_game
+        seat_players
+        seed_player_funds
+        reset_state_bins
+        add_home_state_picks
+      end
+
       def to_s
         "<Game State: #{players.count} players, turn: #{@turn}>"
       end
@@ -94,7 +108,18 @@ module SuperTues
         # rules.allowed? rule_str, value
       end
 
-    private     
+    private
+
+      def seed_player_funds
+        players.each { |player| player.seed_funds }
+      end
+
+      def reset_state_bins
+      end
+
+      def add_home_state_picks
+      end
+
       def init_states
         SuperTues::Game::load_states.each do |state_hash|
           states << State.new(state_hash.with_indifferent_access)
