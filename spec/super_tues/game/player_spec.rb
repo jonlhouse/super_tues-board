@@ -3,25 +3,28 @@ require 'spec_helper.rb'
 module SuperTues
   module Game
 
-    describe Player do
-      let(:board) { Board.new }
-      let(:player) { Player.new('john', board) }
+    describe Player do     
 
-      specify { player.should be_a Player }
-
-      describe "board" do
-        # all players belong to a board
-        specify { player.board.should == board }
-        # not 'setable'
-        specify { expect { player.board = Board.new }.to raise_error }
+      describe ".new" do
+        subject { Player.new(name: 'player-1', color: :red) }
+        it { should be_a Player }
       end
 
-      describe "name" do
-        specify { player.name.should == 'john' }
-        
-        let(:rename) { player.tap { |p| p.name = 'jimmy' } }
-        specify { rename.name.should == 'jimmy' }
+      describe "#name" do
+        it "disallows forbidden names" do
+          Player.name_allowed?('all').should be_false
+          expect { Player.new(name: 'all') }.to raise_error Player::IllegalName
+        end
       end
+
+      let(:player) { Player.new(name: 'john', color: :green) }
+
+      describe "#board" do
+        let(:board) { Board.new }
+        specify { player.board = board ; player.board.should == board }
+      end
+
+      let(:board) { Board.new.tap }
 
       describe "candidate" do
         specify { player.should respond_to :candidate }
