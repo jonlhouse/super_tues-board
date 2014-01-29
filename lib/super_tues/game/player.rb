@@ -9,11 +9,13 @@ module SuperTues
     class Player
 
       class IllegalName < ArgumentError ; end
+      class NotAtGame < StandardError ; end
+      class IllegalSeat < ArgumentError ; end
 
-      attr_accessor :name, :color, :board, :candidate, :candidates_dealt
+      attr_accessor :name, :color, :board, :seat, :candidate, :candidates_dealt
 
       def initialize(attrs)
-        self.name = ensure_name(attrs[:name])        
+        self.name = ensure_name(attrs[:name])     
         self.color = attrs[:color]
         @board = board
         self.candidates_dealt = []
@@ -25,6 +27,17 @@ module SuperTues
 
       def self.name_allowed?(test_name)
         not name_forbidden?(test_name)
+      end
+
+      def seat=(index)
+        raise NotAtGame unless board.present?
+        raise IllegalSeat, "#{index} out of range" unless (0...(board.players.length)).cover?(index)
+        raise IllegalSeat, "seat #{index} taken" if board.seat_taken?(index)
+        @seat = index
+      end
+
+      def to_s
+        name
       end
 
     private

@@ -23,8 +23,11 @@ module SuperTues
         'player-0'
       end
 
-      def add_players(*player_names)
-        players.concat player_names.map{ |name| Player.new(name, self) }
+      def add_players(*new_players)
+        raise ArgumentError, "must be Players" unless new_players.all? { |p| p.is_a? Player }
+        new_players.each { |player| player.board = self }
+        players.concat new_players        
+        players
       end
 
       # remaining candidates is all candidates minus player choices
@@ -45,6 +48,10 @@ module SuperTues
 
       def inspect
         to_s
+      end
+
+      def seat_taken?(num)
+        players.map(&:seat).include?(num)
       end
 
       # Rules delegators

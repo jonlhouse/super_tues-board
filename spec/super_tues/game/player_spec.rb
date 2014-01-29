@@ -17,17 +17,38 @@ module SuperTues
         end
       end
 
+      let(:board) { Board.new }
       let(:player) { Player.new(name: 'john', color: :green) }
 
       describe "#board" do
         let(:board) { Board.new }
         specify { player.board = board ; player.board.should == board }
+      end    
+
+      describe "#candidate" do
+        specify { player.should respond_to :candidate }
       end
 
-      let(:board) { Board.new.tap }
+      let(:player) { Player.new(name: 'john', color: :green).tap { |p| p.board = board } }
 
-      describe "candidate" do
-        specify { player.should respond_to :candidate }
+      describe "#seat" do
+        before(:each) { player.board.stub(:players) { %w(0 1 2 3) } }
+        it "raises error unless board set" do
+          player.board = nil
+          expect { player.seat = 0 }.to raise_error(Player::NotAtGame)
+        end
+        it "raises error when seated out of range" do
+          expect { player.seat = 5 }.to raise_error(Player::IllegalSeat)
+        end
+        it "raises when another player is in that seat" do
+          board.stub(:seat_taken?) { true }
+          expect { player.seat = 0 }.to raise_error(Player::IllegalSeat)
+        end
+        it "correctly assigned" do
+          board.stub(:seat_taken?) { false }
+          player.seat = 0
+          player.seat.should == 0
+        end
       end
     end
 

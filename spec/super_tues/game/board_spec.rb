@@ -42,17 +42,31 @@ module SuperTues
         end
       end
 
+      describe "seats" do
+        describe "#seat_taken?(seat_num)" do
+          it "looks into players' seats" do
+            player = double(seat: 1)
+            board.stub(:players) { [player] }
+            board.seat_taken?(1).should be_true
+            board.seat_taken?(0).should be_false
+          end
+        end
+      end
+
       describe "setup" do
+        let(:bob) { Player.new(name: 'bob') }
+        let(:tom) { Player.new(name: 'tom') }
+        let(:jim) { Player.new(name: 'jim') }
         describe "adding players" do        
           it "add players and updates player's board" do
-            board.add_players('bob', 'tom')
+            board.add_players(bob, tom)
             board.players.count.should == 2 
             board.players.each { |player| player.board.should == board }          
           end
         end
 
         describe "picking candidates" do
-          before(:each) { board.add_players('bob', 'tom', 'jim') }
+          before(:each) { board.add_players(bob, tom, jim) }
           it "deals candidates to players" do
             board.deal_candidates
             board.players.each { |player| player.candidates_dealt.count.should == SuperTues::Game.config[:candidates_per_player] }
