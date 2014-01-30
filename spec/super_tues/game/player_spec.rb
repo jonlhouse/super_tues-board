@@ -67,10 +67,10 @@ module SuperTues
         end
       end
 
-      describe "funds" do
+      describe "cash, clout, card accessors" do
         specify { player.cash = Cash.new(5) ; player.cash.should == 5 }
         specify { player.clout = Clout.new(5) ; player.clout.should == 5 }
-        specify { player.cards = [c = Card.new] ; player.cards.should == [c] }
+        specify { player.cards = [c = double] ; player.cards.should == [c] }
       end
 
       describe "#seed_funds" do
@@ -78,9 +78,9 @@ module SuperTues
           expect { player.candidate = nil ; player.seed_funds }.to raise_error
         end
         describe "adds cash, clout and cards to player's funds" do
-          specify { expect { player.seed_funds }.to change(:cast) }
-          specify { expect { player.seed_funds }.to change(:clout) }
-          specify { expect { player.seed_funds }.to change(:cards) }
+          specify { expect { player.seed_funds }.to change {player.cash} }
+          specify { expect { player.seed_funds }.to change {player.clout} }
+          specify { expect { player.seed_funds }.to change {player.cards} }
         end
       end
 

@@ -31,7 +31,10 @@ module SuperTues
     # Your code goes here...
 
     @config = { 
-      candidates_per_player: 3
+      candidates_per_player: 3,
+      starting_cash: 20,
+      starting_clout: 20,
+      starting_cards: 3
     }
 
     def self.config

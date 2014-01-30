@@ -4,6 +4,10 @@ module SuperTues
       def initialize()
       end
 
+      def deal(n)
+        pop(n)
+      end
+
     private
 
       def load_deck_from_yaml(fname, klass)

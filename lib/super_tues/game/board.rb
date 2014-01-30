@@ -2,16 +2,16 @@ module SuperTues
   module Game
 
     class Board
-      attr_reader :players, :states, :days, :cards, :news, :bills, :rules
+      attr_reader :players, :states, :days, :rules
 
       def initialize()
         @players = []        
         @states = []
         @days = []
         @candidate_deck = CandidateDeck.new
-        @cards = CardDeck.new
-        @news = NewsDeck.new
-        @bills = BillDeck.new
+        @card_deck = CardDeck.new
+        @news_deck = NewsDeck.new
+        @bill_deck = BillDeck.new
         @rules = Rules.new(self)
         @turn = 1
         init_states
@@ -52,6 +52,10 @@ module SuperTues
         players.each do |player|
           player.candidates_dealt = choices.shift(SuperTues::Game.config[:candidates_per_player])
         end
+      end
+
+      def deal_cards(n)
+        @card_deck.pop(n)   # TODO: out of cards reshuffle
       end
 
       # Set the initial start of the game.

@@ -13,7 +13,7 @@ module SuperTues
       class IllegalSeat < ArgumentError ; end
       class IllegalCandidate < ArgumentError ; end
 
-      attr_accessor :name, :color, :board, :seat, :candidates_dealt
+      attr_accessor :name, :color, :board, :seat, :candidates_dealt, :cash, :clout, :cards
       attr_reader :candidate
 
       def initialize(attrs)
@@ -37,8 +37,9 @@ module SuperTues
       end
 
       def seed_funds
-        raise IllegalCandidate, "must select a candidate" unless candidate
-        puts SuperTues::Game.config
+        self.cash = Cash.new SuperTues::Game.config[:starting_cash]
+        self.clout = Clout.new SuperTues::Game.config[:starting_clout]
+        self.cards = board.deal_cards SuperTues::Game.config[:starting_cards]
       end
 
       def to_s

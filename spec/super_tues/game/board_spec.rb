@@ -129,7 +129,7 @@ module SuperTues
           describe "#seed_player_funds" do
             it "calls #seed_funds for each player" do
               board.players.each { |player| player.should_receive :seed_funds }
-              board.send('seed_player_funds')
+              board.send('seed_player_funds')              
             end
           end
 
