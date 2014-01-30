@@ -30,15 +30,15 @@ module SuperTues
         end
 
         describe "card deck and cards" do
-          specify { board.cards.should_not be_empty }
+          specify { board.instance_variable_get(:@card_deck).should be_present }
         end
 
         describe "news deck and news" do
-          specify { board.news.should_not be_empty }
+          specify { board.instance_variable_get(:@news_deck).should be_present }
         end
 
         describe "bills deck" do
-          specify { board.bills.should_not be_empty }
+          specify { board.instance_variable_get(:@bill_deck).should be_present }
         end
       end
 
@@ -131,6 +131,10 @@ module SuperTues
               board.players.each { |player| player.should_receive :seed_funds }
               board.send('seed_player_funds')              
             end
+          end
+
+          describe "#reset_state_bins" do
+            specify { states.each { |state| expect { state.total_picks }.to be == 0 } }
           end
 
           describe "#start_game" do

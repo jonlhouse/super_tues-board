@@ -23,7 +23,7 @@ module SuperTues
  
       def initialize(attrs)
         attrs.each { |attr,value| instance_variable_set("@#{attr}", value) }
-        @picks = {}
+        @picks = StateBin.new(0)
       end
 
     end

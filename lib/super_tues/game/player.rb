@@ -42,6 +42,10 @@ module SuperTues
         self.cards = board.deal_cards SuperTues::Game.config[:starting_cards]
       end
 
+      def to_sym
+        @color.to_sym
+      end
+
       def to_s
         name
       end

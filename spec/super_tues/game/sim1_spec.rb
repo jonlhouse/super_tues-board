@@ -31,7 +31,9 @@ module SuperTues
       before(:each) { board.players.each { |player| player.candidate = player.candidates_dealt.sample } }
       specify { board.candidates_picked?.should be }
 
-      # 
+      # start the game
+      before(:each) { board.start_game }
+      
 
     end
 
