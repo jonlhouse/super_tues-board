@@ -158,7 +158,7 @@ module SuperTues
               board.state(:in).picks[:red].should == 3
               board.state(:ny).picks[:blue].should == 3
             end
-          end
+          endp
 
           describe "#start_game" do
             it "following initializing methods are called" do

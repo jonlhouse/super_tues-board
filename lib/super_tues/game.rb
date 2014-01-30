@@ -17,6 +17,7 @@ require "super_tues/game/bill_deck"
 require "super_tues/game/candidate_deck"
 require "super_tues/game/cash"
 require "super_tues/game/clout"
+require "super_tues/game/front_runner"
 
 require "super_tues/game/events"
 require "super_tues/game/actions"
