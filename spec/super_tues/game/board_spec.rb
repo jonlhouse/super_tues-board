@@ -13,13 +13,19 @@ module SuperTues
           let(:candidates) { board.remaining_candidates }          
         end
 
-        describe "states" do
+        describe "#states" do
           # new game state for the state bins
           specify { board.states.length.should == 51 }  # 50 states + DC
           specify { (board.states.map { |state| state.name } - State::NAMES.keys).should be_empty }
           specify { board.states.each { |state| state.picks.empty?.should be_true } }
           specify { board.states.each { |state| state.electoral_votes.should > 0 } }
           specify { board.states.each { |state| state.sway.should be_within(4).of(0) } }
+        end
+
+        describe "#state(name)" do
+          specify { board.state(:in).name.should == 'Indiana' }
+          # we have two hash -- make sure they point to exactly the same object
+          specify { board.state(:in).should equal board.state('Indiana') }
         end
 
         describe "days" do
@@ -129,12 +135,29 @@ module SuperTues
           describe "#seed_player_funds" do
             it "calls #seed_funds for each player" do
               board.players.each { |player| player.should_receive :seed_funds }
-              board.send('seed_player_funds')              
+              board.send(:seed_player_funds)
             end
           end
 
           describe "#reset_state_bins" do
-            specify { states.each { |state| expect { state.total_picks }.to be == 0 } }
+            it "sets each states picks to zero" do
+              board.states.first.picks[:red] = 10
+              board.send(:reset_state_bins)
+              board.states.each do |state|
+                expect(state.picks.total).to be == 0
+              end
+            end
+          end
+
+          describe "#add_home_state_picks" do
+            let(:p1) { double('player', candidate: double(state: :in), to_sym: :red, name: 'p1') }
+            let(:p2) { double('player', candidate: double(state: :ny), to_sym: :blue, name: 'p2') }
+            before(:each) { board.stub(players: [p1, p2]) }
+            it "should give in and ny 3 picks each" do
+              board.send(:add_home_state_picks)
+              board.state(:in).picks[:red].should == 3
+              board.state(:ny).picks[:blue].should == 3
+            end
           end
 
           describe "#start_game" do

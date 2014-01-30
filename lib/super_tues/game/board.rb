@@ -6,7 +6,8 @@ module SuperTues
 
       def initialize()
         @players = []        
-        @states = []
+        @states = {}.with_indifferent_access
+        @states_long_name = {}.with_indifferent_access
         @days = []
         @candidate_deck = CandidateDeck.new
         @card_deck = CardDeck.new
@@ -58,6 +59,18 @@ module SuperTues
         @card_deck.pop(n)   # TODO: out of cards reshuffle
       end
 
+      def states
+        @state_vals ||= @states.values
+      end
+
+      def state(name)
+        if name.length == 2
+          @states[name.to_sym.downcase]
+        else
+          @states_long_name[name.downcase]
+        end
+      end
+
       # Set the initial start of the game.
       #
       # Should set:
@@ -72,14 +85,6 @@ module SuperTues
         add_home_state_picks
       end
 
-      def to_s
-        "<Game State: #{players.count} players, turn: #{@turn}>"
-      end
-
-      def inspect
-        to_s
-      end
-
       # Assigns seats randomly or by assignment
       def seat_players(assigned_seating = false)
         seating = if !assigned_seating
@@ -90,6 +95,14 @@ module SuperTues
                   end
         seating.each { |seat, player| player.seat = seat }
         seats
+      end
+
+      def to_s
+        "<Game State: #{players.count} players, turn: #{@turn}>"
+      end
+
+      def inspect
+        to_s
       end
 
       # Returns whether seat *num* is already assigned for this board.
@@ -119,14 +132,21 @@ module SuperTues
       end
 
       def reset_state_bins
+        states.each { |state| state.picks.clear }
       end
 
       def add_home_state_picks
+        players.each do |player|
+          starting_picks = rules.rule 'candidate.home_state_picks', default: 3, player: player.name
+          state(player.candidate.state).picks.add player, starting_picks
+        end
       end
 
       def init_states
         SuperTues::Game::load_states.each do |state_hash|
-          states << State.new(state_hash.with_indifferent_access)
+          state = State.new(state_hash.with_indifferent_access)
+          @states[state_hash['abbr'].downcase.to_sym] = state
+          @states_long_name[state_hash['name'].downcase] = state
         end
       end
 

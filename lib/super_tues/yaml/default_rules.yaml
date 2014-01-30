@@ -26,3 +26,5 @@ action:
     cost: 'free'
   pass:
     cost: 'free'
+candidate:
+  home_state_picks: 3

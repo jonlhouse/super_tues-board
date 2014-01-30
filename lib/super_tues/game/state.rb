@@ -18,6 +18,7 @@ module SuperTues
         "Tennessee"=>"TN", "Texas"=>"TX", "Utah"=>"UT", "Vermont"=>"VT", "Virginia"=>"VA", 
         "Washington"=>"WA", "West Virginia"=>"WV", "Wisconsin"=>"WI", "Wyoming"=>"WY"
       }
+      ABBRS = NAMES.invert
 
       attr_reader :name, :abbr, :electoral_votes, :sway, :picks
  

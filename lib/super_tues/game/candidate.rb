@@ -3,7 +3,7 @@ module SuperTues
 
     class Candidate
 
-      attr_reader :name, :clout, :cash, :cards, :description
+      attr_reader :name, :clout, :cash, :cards, :description, :state
 
       def initialize(attrs)
         attrs.each { |attr,value| instance_variable_set("@#{attr}", value) }
