@@ -167,6 +167,9 @@ module SuperTues
               board.should_receive :reset_state_bins
               board.should_receive :add_home_state_picks
               board.start_game
+              board.current_player.should be_in board.players
+              board.round.should == 0
+              board.turn.should == 0
             end
           end
 

@@ -13,7 +13,7 @@ module SuperTues
         end
 
         describe "#allowed?(rules)" do
-          let(:rules) { Board.new.rules }
+          let(:rules) { Board.new.tap { |b| b.stub(current_player: 'p1') }.rules }
           context "true when" do
             it "<= max picks" do
               RadioSpot.new('Florida' => 5).allowed?(rules).should be_true

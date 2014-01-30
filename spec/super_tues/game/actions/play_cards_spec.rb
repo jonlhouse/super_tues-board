@@ -13,7 +13,7 @@ module SuperTues
         end
 
         describe "#allowed?" do
-          let(:rules) { Board.new.rules }
+          let(:rules) { Board.new.tap { |b| b.stub(current_player: 'p1') }.rules }
           context "true when" do
             specify { PlayCards.new(card).allowed?(rules).should be }
             it "more than one card played when rules allow" do

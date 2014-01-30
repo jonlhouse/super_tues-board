@@ -20,7 +20,7 @@ module SuperTues
                   when RuleSet
                     rules_attrs.deep_dup
                   end
-        @affects = Array.wrap(ensure_player(player)).map(&:to_s)
+        @affects = Array.wrap(player).map { |p| ensure_player(p).to_s }
         self.duration = Integer(duration) rescue duration
       end
 
@@ -150,7 +150,7 @@ module SuperTues
         if player == :all || player == 'all'
           :any
         else
-          player
+          player.to_s
         end
       end
 

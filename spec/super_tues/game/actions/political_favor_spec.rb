@@ -14,7 +14,7 @@ module SuperTues
         end
 
         describe "#allowed?" do
-          let(:rules) { Board.new.rules }
+          let(:rules) { Board.new.tap { |b| b.stub(current_player: 'p1') }.rules }
           context "true when" do
             it "total picks <= max" do
               PoliticalFavor.new('Iowa' => 5).allowed?(rules).should be

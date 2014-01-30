@@ -2,7 +2,7 @@ module SuperTues
   module Game
 
     class Board
-      attr_reader :players, :states, :days, :rules
+      attr_reader :players, :states, :days, :rules, :current_player, :round, :turn
 
       def initialize()
         @players = []        
@@ -14,14 +14,8 @@ module SuperTues
         @news_deck = NewsDeck.new
         @bill_deck = BillDeck.new
         @rules = Rules.new(self)
-        @turn = 1
         init_states
         init_days
-      end
-
-      # PLACEHOLDER
-      def current_player
-        'player-0'
       end
 
       def add_players(*new_players)
@@ -83,6 +77,7 @@ module SuperTues
         seed_player_funds
         reset_state_bins
         add_home_state_picks
+        pick_who_goes_first
       end
 
       # Assigns seats randomly or by assignment
@@ -126,6 +121,13 @@ module SuperTues
       end
 
     private
+
+      def pick_who_goes_first
+        @current_player = players.sample
+        @turn = 0
+        @round = 0
+        @current_player
+      end
 
       def seed_player_funds
         players.each { |player| player.seed_funds }

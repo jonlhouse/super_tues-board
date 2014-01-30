@@ -27,7 +27,7 @@ module SuperTues
             rset = RuleSet.new('some.rule', 42).instance_variable_get(:@affects).should == ['any']
           end
           it "is overridable" do
-            rset = RuleSet.new('some.rule', 42, player: ['player_1']).instance_variable_get(:@affects).should == ['player_1']
+            rset = RuleSet.new('some.rule', 42, player: double(to_s: 'player_0')).instance_variable_get(:@affects).should == ['player_0']
           end
         end
 
@@ -50,7 +50,7 @@ module SuperTues
       end
 
       describe "affects?" do
-        let(:select_rule) { RuleSet.new('some.rule', 42, player: ['player_1', 'player_2']) }
+        let(:select_rule) { RuleSet.new('some.rule', 42, player: [double(to_s: 'player_1'), double(to_s: 'player_2')]) }
         let(:global_rule) { RuleSet.new('some.rule', 42, player: :any) }
 
         specify { select_rule.affects?('player_1').should be }
