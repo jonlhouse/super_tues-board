@@ -3,7 +3,11 @@ module SuperTues
     class StateBin < Hash
 
       def add(key, picks)
-        self[key.to_sym] = self[key.to_sym] + picks
+        self[key.to_sym] = self[key.to_sym] + picks.to_int
+      end
+
+      def subtract(key, picks)
+        self[key.to_sym] = [(self[key.to_sym] - picks.to_int), 0]   #floor of zero
       end
 
       def [](key)
@@ -11,8 +15,11 @@ module SuperTues
       end
 
       def []=(key, value)
-        raise ArgumentError, "#{value} must be an Integer" unless value.respond_to?(:to_int)
         super(key.to_sym, value.to_int)
+      end
+
+      def total
+        self.values.inject(0, :+)
       end
 
     end

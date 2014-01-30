@@ -27,12 +27,11 @@ module SuperTues
           state.picks.add :red, 10
           state.picks[:red].should == 10
         end
-
       end
 
-      describe "#total_picks" do
-        before(:each) { state}
-        specify { state.total_picks.should == 10 }
+      describe "total picks" do
+        before(:each) { state.picks.add(:red, 2) ; state.picks.add(:blue, 8) }
+        specify { state.picks.total.should == 10 }
       end
 
     end

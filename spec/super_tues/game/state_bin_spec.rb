@@ -20,6 +20,14 @@ module SuperTues
         end
       end
 
+      describe "total" do
+        specify { StateBin.new(0).total.should == 0 }
+        it "sums up picks across all colors" do
+          bin = StateBin[red: 1, blue: 2, green: 3]
+          bin.total.should == 6
+        end
+      end
+
     end
   end
 end
