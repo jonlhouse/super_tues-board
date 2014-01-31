@@ -222,6 +222,13 @@ module SuperTues
         end
       end
 
+      describe ".tomorrow!" do
+        let(:game) { setup_game }
+        it "advances today to tomorrow" do
+          expect(game.tomorrow!).to change(game.today).to(game.days[1])
+        end
+      end
+
     end
 
   end
