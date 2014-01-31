@@ -50,7 +50,11 @@ module SuperTues
 
       # game should assign a front runner
       specify { board.front_runner.should be_in board.players }
+    end
 
+    describe "first turn" do
+      let(:board) { setup_game }
+      specify { board.players.should_not be_empty }
     end
 
   end
