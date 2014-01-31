@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module SuperTues
-  module Game
+  module Board
     module Actions
       describe RadioSpot do
         specify { RadioSpot.should < PlayPicks }
@@ -13,7 +13,7 @@ module SuperTues
         end
 
         describe "#allowed?(rules)" do
-          let(:rules) { Board.new.tap { |b| b.stub(current_player: 'p1') }.rules }
+          let(:rules) { Game.new.tap { |b| b.stub(current_player: 'p1') }.rules }
           context "true when" do
             it "<= max picks" do
               RadioSpot.new('Florida' => 5).allowed?(rules).should be_true

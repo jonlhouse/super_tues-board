@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module SuperTues
-  module Game
+  module Board
 
     describe Card do
       let(:card) { Card.new(

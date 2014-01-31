@@ -20,7 +20,7 @@ Rules:
   JSON structure but access them via method calls.
   This will also let me define methods if needed.
 
-  There will be a default_rules defined in SuperTues::Game.default_rules.  Each 
+  There will be a default_rules defined in SuperTues::Board.default_rules.  Each 
   game can have a rule_change definition that overlays on the default rules.
 
   Board will receive simple API and delegate to the current rules.

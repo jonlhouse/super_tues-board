@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module SuperTues
-  module Game
+  module Board
     module Actions
 
       describe Action do
@@ -9,7 +9,7 @@ module SuperTues
           specify { Action.should respond_to :build }
           [ 'radio_spot', 'political_favor', 'move', 'play_cards', 'discard', 'poll', 'pass'].each do |klass|
             specify { Action.build(klass).should 
-                be_a SuperTues::Game::Actions.const_get(klass.camelcase) }
+                be_a SuperTues::Board::Actions.const_get(klass.camelcase) }
           end
         end
 

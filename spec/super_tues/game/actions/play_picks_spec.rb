@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module SuperTues
-  module Game
+  module Board
     module Actions
       describe PlayPicks do
         specify { PlayPicks.should < Action }

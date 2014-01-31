@@ -2,9 +2,9 @@
 #
 module GameSteps
   def setup_game
-    player0, player1, player2, player3 = (0...4).map { |n| SuperTues::Game::Player.new name: "player-#{n}" }
+    player0, player1, player2, player3 = (0...4).map { |n| SuperTues::Board::Player.new name: "player-#{n}" }
 
-    board = SuperTues::Game::Board.new
+    board = SuperTues::Board::Game.new
     board.add_players player0, player1, player2, player3
     board.deal_candidates
     board.players.each { |player| player.candidate = player.candidates_dealt.sample }

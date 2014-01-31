@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module SuperTues
-  module Game
+  module Board
 
     describe NewsDeck do
       specify { NewsDeck.should < Deck }

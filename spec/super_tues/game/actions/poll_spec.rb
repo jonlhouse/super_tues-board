@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module SuperTues
-  module Game
+  module Board
     module Actions
       describe Poll do
         specify { Poll.should < Action }
@@ -11,7 +11,7 @@ module SuperTues
         end
 
         describe "#allowed?" do
-          let(:rules) { Board.new.tap { |b| b.stub(current_player: 'p1') }.rules }
+          let(:rules) { Game.new.tap { |b| b.stub(current_player: 'p1') }.rules }
           context "true when" do
             it "under max allowed" do
               Poll.new('Indiana').allowed?(rules).should be

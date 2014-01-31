@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 module SuperTues
-  module Game
+  module Board
 
     describe Rules do
-      let(:board) { double(current_player: 'player-0').as_null_object }
+      let(:game) { double(current_player: 'player-0').as_null_object }
       describe "default" do
         specify { Rules.default.should be_a RuleSet }
       end 
 
-      let(:default) { Rules.new(board) }
+      let(:default) { Rules.new(game) }
 
       describe "rule(str)" do        
         # check using default rule: action.radio_spot.picks.max
@@ -56,7 +56,7 @@ module SuperTues
         end
         context "when overriden" do
           let(:ammended) { default.ammend('action.play_picks.allowed', false, player: :current) }
-          specify { ammended['action.play_picks.allowed', player: board.current_player].should_not be_true }
+          specify { ammended['action.play_picks.allowed', player: game.current_player].should_not be_true }
           specify { ammended['action.play_picks.allowed', player: 'another-player'].should be_true }
         end
       end

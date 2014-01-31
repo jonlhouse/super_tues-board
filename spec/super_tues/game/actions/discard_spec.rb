@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module SuperTues
-  module Game
+  module Board
     module Actions
       describe Discard do
         specify { Discard.should < Action }
@@ -13,7 +13,7 @@ module SuperTues
         end
 
         describe "#allowed?" do
-          let(:rules) { Board.new.tap { |b| b.stub(current_player: 'p1') }.rules }
+          let(:rules) { Game.new.tap { |b| b.stub(current_player: 'p1') }.rules }
           context "true when" do
             specify { Discard.new(card).allowed?(rules).should be }
             it "more than one card discarded when rules allow" do

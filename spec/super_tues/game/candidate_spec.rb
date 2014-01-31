@@ -1,7 +1,7 @@
 require 'spec_helper.rb'
 
 module SuperTues
-  module Game
+  module Board
 
     describe Candidate do
 
