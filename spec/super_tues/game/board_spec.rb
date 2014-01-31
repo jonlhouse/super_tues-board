@@ -158,7 +158,7 @@ module SuperTues
               board.state(:in).picks[:red].should == 3
               board.state(:ny).picks[:blue].should == 3
             end
-          endp
+          end
 
           describe "#start_game" do
             it "following initializing methods are called" do
@@ -167,7 +167,7 @@ module SuperTues
               board.should_receive :reset_state_bins
               board.should_receive :add_home_state_picks
               board.start_game
-              board.current_player.should be_in board.players
+              expect(board.front_runner).to_not be_nil
               board.round.should == 0
               board.turn.should == 0
             end

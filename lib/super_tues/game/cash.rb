@@ -1,6 +1,7 @@
 module SuperTues
   module Game
     class Cash
+      include Comparable
 
       def initialize(value)
         raise ArgumentError, "#{value} must be an Integer" unless value.is_a? Integer
@@ -17,6 +18,10 @@ module SuperTues
 
       def -(other)
         cast(other) { |this, other| this - other }
+      end
+
+      def <=>(other)
+        cast(other) { |this, other| this <=> other }
       end
 
       def to_i

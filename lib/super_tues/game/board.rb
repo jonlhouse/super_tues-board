@@ -14,8 +14,13 @@ module SuperTues
         @news_deck = NewsDeck.new
         @bill_deck = BillDeck.new
         @rules = Rules.new(self)
+        @front_runner = FrontRunner.new(self)
         init_states
         init_days
+      end
+
+      def front_runner
+        @front_runner.is
       end
 
       def add_players(*new_players)
@@ -73,10 +78,13 @@ module SuperTues
       #   * reset state bins
       #
       def start_game
+        @round = 0
+        @turn = 0 
+        assign_player_colors
         seat_players
         seed_player_funds
         reset_state_bins
-        add_home_state_picks
+        add_home_state_picks        
         pick_who_goes_first
       end
 
@@ -122,11 +130,13 @@ module SuperTues
 
     private
 
+      def assign_player_colors
+        colors = Player::COLORS.dup.shuffle
+        players.each { |player| player.color = colors.pop }
+      end
+
       def pick_who_goes_first
-        @current_player = players.sample
-        @turn = 0
-        @round = 0
-        @current_player
+        @front_runner.random        
       end
 
       def seed_player_funds

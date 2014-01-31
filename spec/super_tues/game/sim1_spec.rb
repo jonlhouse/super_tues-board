@@ -30,6 +30,10 @@ module SuperTues
       # start the game
       before(:each) { board.start_game }
 
+      # colors are assigned to players
+      specify { board.players.each { |player| player.color.should be_in Player::COLORS } }
+      specify { board.players.map(&:color).uniq.length.should == board.players.length }
+
       # home states
       specify { board.players.each { |player| board.state(player.candidate.state).picks[player].should == 3 } }
 
@@ -38,7 +42,14 @@ module SuperTues
 
       # seating players
       specify { board.seats.keys.sort.should == (0..3).to_a }
-      
+
+      # players should have seed funds
+      specify { board.players.each { |player| expect(player.cash).to be > 0 } }
+      specify { board.players.each { |player| expect(player.clout).to be > 0 } }
+      specify { board.players.each { |player| expect(player.cards.length).to be > 0 } }
+
+      # game should assign a front runner
+      specify { board.front_runner.should be_in board.players }
 
     end
 

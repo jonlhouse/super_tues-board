@@ -1,6 +1,8 @@
 module SuperTues
   module Game
     class Clout
+      include Comparable
+
       def initialize(_amount)
         raise ArgumentError, "#{_amount} must be an Integer" unless _amount.is_a? Integer
         @amount = _amount
@@ -18,6 +20,10 @@ module SuperTues
       
       def -(other)
         cast(other) { |this, other| Clout.new(this - other) }
+      end
+
+      def <=>(other)
+        cast(other) { |this, other| this <=> other }
       end
 
       def coerce(other)

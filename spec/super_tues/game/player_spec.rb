@@ -6,7 +6,7 @@ module SuperTues
     describe Player do     
 
       describe ".new" do
-        subject { Player.new(name: 'player-1', color: :red) }
+        subject { Player.new(name: 'player-1') }
         it { should be_a Player }
       end
 
@@ -18,7 +18,7 @@ module SuperTues
       end
 
       let(:board) { Board.new }
-      let(:player) { Player.new(name: 'john', color: :green) }
+      let(:player) { Player.new(name: 'john') }
 
       describe "#board" do
         let(:board) { Board.new }
@@ -45,7 +45,7 @@ module SuperTues
         end
       end
 
-      let(:player) { Player.new(name: 'john', color: :green).tap { |p| p.board = board } }
+      let(:player) { Player.new(name: 'john').tap { |p| p.board = board } }
 
       describe "#seat" do
         before(:each) { player.board.stub(:players) { %w(0 1 2 3) } }
@@ -82,6 +82,10 @@ module SuperTues
           specify { expect { player.seed_funds }.to change {player.clout} }
           specify { expect { player.seed_funds }.to change {player.cards} }
         end
+      end
+
+      describe "#color" do
+        specify { expect { player.color = :red }.to change { player.color }.from(nil).to(:red) }
       end
 
     end

@@ -13,12 +13,13 @@ module SuperTues
       class IllegalSeat < ArgumentError ; end
       class IllegalCandidate < ArgumentError ; end
 
+      COLORS = %i(red green blue yellow black)
+
       attr_accessor :name, :color, :board, :seat, :candidates_dealt, :cash, :clout, :cards
       attr_reader :candidate
 
       def initialize(attrs)
-        self.name = ensure_name(attrs[:name])     
-        self.color = attrs[:color]
+        self.name = ensure_name(attrs[:name])
         @board = board
         self.candidates_dealt = []
       end

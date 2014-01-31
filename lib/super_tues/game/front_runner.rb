@@ -8,11 +8,27 @@ module SuperTues
     #
     class FrontRunner
 
-      def initialize(board)
+      def initialize(board, current = nil)
         @board = board
+        @current = current
       end
 
+      def is
+        @current
+      end
 
+      def random
+        @current = @board.players.sample
+      end
+
+      def select
+        top_scores = @board.players.group_by { |player| player.score }.sort.reverse[0].last
+        if top_scores.length > 1
+          @current    # tie goes to current front runner
+        else
+          @current = top_scores.first
+        end        
+      end
 
 
     end
