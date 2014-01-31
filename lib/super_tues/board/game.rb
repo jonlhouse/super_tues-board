@@ -2,7 +2,7 @@ module SuperTues
   module Board
 
     class Game
-      attr_reader :players, :states, :days, :rules, :current_player, :round, :turn
+      attr_reader :players, :states, :days, :rules, :current_player, :round, :turn, :today
 
       def initialize()
         @players = []        
@@ -72,11 +72,6 @@ module SuperTues
 
       # Set the initial start of the game.
       #
-      # Should set:
-      #   * player seats
-      #   * player starting funds
-      #   * reset state bins
-      #
       def start_game
         @round = 0
         @turn = 0 
@@ -84,8 +79,9 @@ module SuperTues
         seat_players
         seed_player_funds
         reset_state_bins
-        add_home_state_picks        
+        add_home_state_picks
         pick_who_goes_first
+        start_at_first_day
       end
 
       # Assigns seats randomly or by assignment
@@ -152,6 +148,10 @@ module SuperTues
           starting_picks = rules.rule 'candidate.home_state_picks', default: 3, player: player.name
           state(player.candidate.state).picks.add player, starting_picks
         end
+      end
+
+      def start_at_first_day
+        @today = @days.first
       end
 
       def init_states

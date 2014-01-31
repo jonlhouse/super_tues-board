@@ -43,7 +43,7 @@ module SuperTues
       end
 
       def to_sym
-        @color.to_sym
+        color.to_sym
       end
 
       def to_s
@@ -51,7 +51,7 @@ module SuperTues
       end
 
       def inspect
-        "#<Player #{name}: color: #{color}, seat: #{seat}>"
+        "#<Player '#{name}': color: #{color}, seat: #{seat}>"
       end
 
       def self.name_forbidden?(test_name)
