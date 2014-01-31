@@ -7,6 +7,10 @@ module SuperTues
         end
       end
 
+      def to_s
+        'Payday'
+      end
+
     end
   end
 end

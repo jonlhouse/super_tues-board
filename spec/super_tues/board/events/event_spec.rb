@@ -7,6 +7,7 @@ module SuperTues
         
         describe ".build" do
           specify { Event.build("read_bill").should be_a ReadBill }
+          specify { Rent.build(:rent, cost: 2).should be_a Rent }
         end
 
       end

@@ -8,6 +8,10 @@ module SuperTues
 
         def happen
         end
+
+        def to_s
+          'State Primary'
+        end
       end
 
     end

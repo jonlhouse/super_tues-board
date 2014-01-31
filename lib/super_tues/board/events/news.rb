@@ -6,6 +6,10 @@ module SuperTues
 
         def happen
         end
+
+        def to_s
+          'News'
+        end
         
       end
 

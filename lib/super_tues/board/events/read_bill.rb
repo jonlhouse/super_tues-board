@@ -5,6 +5,10 @@ module SuperTues
       class ReadBill < Event
         def happen
         end
+
+        def to_s
+          'Read New Bill'
+        end
       end
 
     end

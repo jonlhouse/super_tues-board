@@ -5,6 +5,10 @@ module SuperTues
       class VoteBill < Event
         def happen
         end
+
+        def to_s
+          'Vote on Bill'
+        end
       end
 
     end

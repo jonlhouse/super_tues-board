@@ -11,6 +11,10 @@ module SuperTues
 
         def happen
         end
+
+        def to_s
+          'Rent Due'
+        end
       end
     
     end

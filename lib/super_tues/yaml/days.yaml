@@ -1,92 +1,92 @@
 -
   date: '2016-1-4'
   events:
-    - 'business'
+    business:
 -
   date: '2016-1-5'
   events:
-    - 'business'
+    business:
 -
   date: '2016-1-6'
   events:
-    - 'business'
+    business:
 -
   date: '2016-1-7'
   events:
-    - 'read_bill'
-    - rent: { cost: 1 }
+    business:
+    rent: { cost: 1 }
 -
   date: '2016-1-8'
   events:
-    - 'business'
+    business:
 -
   date: '2016-1-9'
   events:
-    - 'business'
+    business:
 -
   date: '2016-1-10'
   events:
-    - 'payday'
-    - 'news'
+    payday:
+    news:
 -
   date: '2016-1-11'
   events:
-    - 'business'
+    business:
 -
   date: '2016-1-12'
   events:
-    - 'business'
+    business:
 -
   date: '2016-1-13'
   events:
-    - 'business'
+    business:
 -
   date: '2016-1-14'
   events:
-    - 'vote_bill'
-    - 'read_bill'
-    - rent: { cost: 2 }
+    vote_bill:
+    read_bill:
+    rent: { cost: 2 }
 -
   date: '2016-1-15'
   events:
-    - 'business'
+    business:
 -
   date: '2016-1-16'
   events:
-    - 'business'
+    business:
 -
   date: '2016-1-17'
   events:
-    - 'payday'
-    - 'news'
+    payday:
+    news:
 -
   date: '2016-1-18'
   events:
-    - primary: { state: 'Iowa' }
+    primary: { state: 'Iowa' }
 -
   date: '2016-1-19'
   events:
-    - 'business'
+    business:
 -
   date: '2016-1-20'
   events:
-    - 'business'
+    business:
 -
   date: '2016-1-21'
   events:
-    - 'vote_bill'
-    - 'read_bill'
-    - rent: { cost: 3 }
+    vote_bill:
+    read_bill:
+    rent: { cost: 3 }
 -
   date: '2016-1-22'
   events:
-    - 'business'
+    business:
 -
   date: '2016-1-23'
   events:
-    - primary: { state: 'Nevada' }
+    primary: { state: 'Nevada' }
 -
   date: '2016-1-24'
   events:
-    - 'payday'
-    - 'news'
+    payday:
+    news:
