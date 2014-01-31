@@ -10,8 +10,9 @@ module SuperTues
       end
 
       describe "#to_s" do
-        specify { Cash.new(10).to_s.should == '$100k' }
-        specify { Cash.new(0).to_s.should == '$0k' }
+        specify { expect(Cash.new(1).to_s).to be == '$100k' }
+        specify { expect(Cash.new(10).to_s).to be == '$1,000k' }
+        specify { expect(Cash.new(0).to_s).to be == '$0k' }
       end
 
       describe "#+" do

@@ -18,7 +18,7 @@ module SuperTues
 
       def -(other)
         cast(other) { |this, other| this - other }
-      end
+    end
 
       def <=>(other)
         cast(other) { |this, other| this <=> other }
@@ -29,7 +29,8 @@ module SuperTues
       end
 
       def to_s
-        "$#{@amount*10}k"
+        amount_with_commas = (@amount*100).to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+        "$#{amount_with_commas}k"
       end
 
       def coerce(other)
