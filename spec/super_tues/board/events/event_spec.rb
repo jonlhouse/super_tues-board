@@ -19,19 +19,28 @@ module SuperTues
             before(:each) { subject.complete! }
             its(:complete?) { should be_true }
           end
-        end
+        end  
 
-        describe "#notify" do
+        describe "#type" do
+          specify { expect { expect(Event.build("business").type).to be == :business } }
+          specify { expect { expect(Event.build("read_bill").type).to be == :read_bill } }
+        end     
+
+        describe "modes" do
           let(:players) { [double, double, double] }
           let(:game) { double players: players }
           let(:notice) { double }
-
           subject { Event.new({}) }
-          it "should yield a default Notification to each player" do
-            expect { |b| subject.notify(players, notice, &b) }.to yield_control.exactly(3).times
-          end
-        end
 
+          context "all_at_once" do
+            describe "#notify" do            
+              it "should yield a default Notification to each player" do
+                expect { |b| subject.notify(players, notice, &b) }.to yield_control.exactly(3).times
+              end
+            end
+          end    
+
+        end
       end
     end
   end
