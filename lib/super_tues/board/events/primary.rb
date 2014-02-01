@@ -10,9 +10,6 @@ module SuperTues
           @state = attrs[:state]
         end
 
-        def happen
-        end
-
         def to_s
           "#{state} State Primary"
         end

@@ -12,8 +12,6 @@ module SuperTues
         describe "#to_s" do
           its(:to_s) { should match /iowa state primary/i }          
         end
-        
-        specify { primary.should respond_to :happen }
       end
 
     end

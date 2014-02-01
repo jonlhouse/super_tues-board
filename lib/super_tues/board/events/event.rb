@@ -25,7 +25,10 @@ module SuperTues
 
         # Yield a notification object to each of the players
         # 
-        def notify(players)
+        def notify(players, notification = Notification.new)
+          players.each do
+            yield notification
+          end
         end
 
         def self.build(klass, params = {})

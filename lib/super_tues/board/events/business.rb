@@ -6,7 +6,10 @@ module SuperTues
 
       class Business < Event
 
-        def happen
+        # Build the notification and pass to super to yield to players
+        def notify(game)
+          notice = Notification.new
+          super(game.players, notice)
         end
 
         def to_s

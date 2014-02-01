@@ -21,6 +21,17 @@ module SuperTues
           end
         end
 
+        describe "#notify" do
+          let(:players) { [double, double, double] }
+          let(:game) { double players: players }
+          let(:notice) { double }
+
+          subject { Event.new({}) }
+          it "should yield a default Notification to each player" do
+            expect { |b| subject.notify(players, notice, &b) }.to yield_control.exactly(3).times
+          end
+        end
+
       end
     end
   end
