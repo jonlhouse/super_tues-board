@@ -84,6 +84,10 @@ module SuperTues
         start_at_first_day
       end
 
+      def tomorrow!
+        
+      end
+
       # Assigns seats randomly or by assignment
       def seat_players(assigned_seating = false)
         seating = if !assigned_seating
