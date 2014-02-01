@@ -1,7 +1,9 @@
 module SuperTues
   module Board
     module Events
-      class PrimaryNotice < Notice
+      module Notices
+        class PrimaryNotice < Notice
+        end
       end
     end
   end

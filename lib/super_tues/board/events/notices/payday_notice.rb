@@ -1,7 +1,9 @@
 module SuperTues
   module Board
     module Events
-      class PaydayNotice < Notice
+      module Notices
+        class PaydayNotice < Notice
+        end
       end
     end
   end

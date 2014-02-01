@@ -1,7 +1,9 @@
 module SuperTues
   module Board
     module Events
-      class ReadBillNotice < Notice
+      module Notices
+        class ReadBillNotice < Notice
+        end
       end
     end
   end

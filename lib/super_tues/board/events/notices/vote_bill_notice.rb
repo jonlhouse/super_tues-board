@@ -1,7 +1,9 @@
 module SuperTues
   module Board
     module Events
-      class VoteBillNotice < Notice
+      module Notices
+        class VoteBillNotice < Notice
+        end
       end
     end
   end
