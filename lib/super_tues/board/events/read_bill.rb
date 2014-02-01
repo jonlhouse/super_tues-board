@@ -3,7 +3,9 @@ module SuperTues
     module Events
 
       class ReadBill < Event
-        def happen
+        def happen(game)
+          game.active_bill = bill = game.deal_bill
+          bill.to_s
         end
 
         def to_s

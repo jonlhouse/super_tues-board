@@ -3,13 +3,29 @@ module SuperTues
     module Events
       # Base class for game events both interactive and non-interactive.
       #
-      # Events can be built from hash data or a string using the ::build method.
-      #
-      # Events will .happen
-      #
-      #
+      # Events have 3 stages:
+      #   1) #notify is called to let all the players know this event is happening
+      #     It will yield a new Notificiation object to each player.
+      #   2) #
+      #   3) #update is called to let all the players know the results of this event.
+      #     It will yield a new Happened object to each player
       class Event
+
         def initialize(params)
+          @complete = false
+        end
+
+        def complete?
+          @complete
+        end
+
+        def complete!
+          @complete = true
+        end
+
+        # Yield a notification object to each of the players
+        # 
+        def notify(players)
         end
 
         def self.build(klass, params = {})
