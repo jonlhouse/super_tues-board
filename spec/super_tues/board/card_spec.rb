@@ -23,7 +23,6 @@ module SuperTues
       specify { card.up?.should_not be }
       specify { card.down?.should be }
       specify { expect { card.show }.to change { card.up? } }
-
     end
 
   end

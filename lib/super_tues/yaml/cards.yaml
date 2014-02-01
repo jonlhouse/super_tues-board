@@ -1,6 +1,6 @@
 -
   title: 'Television Spot'
-  descption: 'Pay $1.5M to play 4 picks each into 3 state bins.'
+  description: 'Pay $1.5M to play 4 picks each into 3 state bins.'
   effect:
     target: 'self'
     action:
@@ -14,7 +14,7 @@
 -
   title: 'Dirty Little Secret'
   description: 'Pay 10 clout and $500k to discard.  If uncovered lose all clout, all cards and miss next payday'
-  action:
+  effect:
     target: 'self'
     action:
       discard: 'this_card'
@@ -24,7 +24,7 @@
 -
   title: 'Journalist'
   description: "Expose 1 candidates opportunity cards (uncovers Dirty Little Secrets)."
-  action:
+  effect:
     target: 'any'
     action: 'expose_cards'
   cost: 'free'
@@ -32,7 +32,7 @@
 -
   title: 'Spend time with the leadership'
   description: 'Gain 5 clout'
-  action:
+  effect:
     target: 'self'
     action:
       receive:
@@ -43,7 +43,7 @@
 - 
   title: 'Fundrasing Dinner'
   description: 'Gain $500k'
-  action:
+  effect:
     target: 'self'
     action:
       receive:
@@ -54,7 +54,7 @@
 -
   title: 'Committee Chair'
   description: 'Each candidate pays you $200k or 2 clout (their choice).'
-  action:
+  effect:
     target: 'self'
     receive:      
       clout: 2
@@ -64,7 +64,7 @@
 -
   title: 'Double Time!'
   description: 'Double limit of any normal play (e.g. buy 10 picks, poll 2 states, move 2 spots) in addition to playing this card.'
-  action:
+  effect:
     target: 'self'
     rule_change:
       duration: 1
@@ -88,7 +88,7 @@
 -
   title: 'Half Price!'
   description: 'Purchase picks for $100k or 1 clout this turn in addition to playing this card.'
-  action:
+  effect:
     target: 'self'
     action: 
       target: 'self'
