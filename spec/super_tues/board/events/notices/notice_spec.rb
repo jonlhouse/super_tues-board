@@ -4,8 +4,7 @@ module SuperTues
   module Board
     module Events
       module Notices
-        describe VoteBillNotice do
-          it { should be_a Notice }
+        describe Notice do
         end
       end
     end

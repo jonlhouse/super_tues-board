@@ -23,11 +23,11 @@ module SuperTues
           @complete = true
         end
 
-        # Yield a notification object to each of the players
+        # Yield a notice object to each of the players
         # 
-        def notify(players, notification = Notification.new)
-          players.each do
-            yield notification
+        def notify(players, notice = Notices::Notice.new)
+          players.each do |player|
+            yield player, notice
           end
         end
 

@@ -8,8 +8,7 @@ module SuperTues
 
         # Build the notification and pass to super to yield to players
         def notify(game)
-          notice = Notification.new
-          super(game.players, notice)
+          super(game.players, BusinessNotice.new)
         end
 
         def to_s
