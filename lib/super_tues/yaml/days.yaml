@@ -90,3 +90,42 @@
   events:
     payday:
     news:
+-
+  date: '2016-1-25'
+  events:
+    business:
+-
+  date: '2016-1-26'
+  events:  
+    primary: { state: 'New Hampshire' }
+-
+  date: '2016-1-27'
+  events:
+    business:
+-
+  date: '2016-1-28'
+  events:
+    vote_bill:
+    read_bill:
+-
+  date: '2016-1-29'
+  events:
+    business:
+-
+  date: '2016-1-30'
+  events:
+    business:
+-
+  date: '2016-1-31'
+  events:
+    payday:
+    news:
+-
+  date: '2016-2-1'
+  events:
+    business:
+-
+  date: '2016-2-2'
+  events:
+    - primary: { state: 'South Carolina' }
+    - primary: { state: 'Florida' }

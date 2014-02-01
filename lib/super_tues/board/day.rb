@@ -17,8 +17,11 @@ module SuperTues
 
     private
 
-      def build_events(events_ary)
-        events_ary.collect do |event,params|
+      def build_events(events_params)
+        # handle array recursilvely
+        return events_params.flat_map { |item| build_events(item) } if events_params.is_a?(Array)
+
+        events_params.collect do |event,params|
           if params
             Events::Event.build(event, params)
           else

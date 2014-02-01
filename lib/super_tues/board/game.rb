@@ -26,9 +26,8 @@ module SuperTues
       # delegate today, today= and tomorrow! to calendar
       def_delegators :@calendar, :today, :today=, :tomorrow!
 
-      def front_runner
-        @front_runner.is
-      end
+      # delegate game.front_runner to @front_runner.is
+      def_delegator :@front_runner, :is, :front_runner
 
       def add_players(*new_players)
         new_players.each { |player| player.game = self }

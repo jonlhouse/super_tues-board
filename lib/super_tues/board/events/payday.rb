@@ -5,12 +5,11 @@ module SuperTues
       class Payday < Event
         def happen
         end
-      end
 
-      def to_s
-        'Payday'
+        def to_s
+          'Payday'
+        end
       end
-
     end
   end
 end
