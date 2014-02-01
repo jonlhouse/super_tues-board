@@ -28,13 +28,6 @@ module SuperTues
           specify { game.state(:in).should equal game.state('Indiana') }
         end
 
-        describe "days" do
-          # new game initializes the game day array
-          specify { game.days.should_not be_empty }
-          let(:first_day) { game.days.first }
-          specify { first_day.date.should == Date.new(2016, 1, 4)}
-        end
-
         describe "card deck and cards" do
           specify { game.instance_variable_get(:@card_deck).should be_present }
         end
@@ -198,7 +191,7 @@ module SuperTues
             end
             it "sets today to the first calendar day" do
               game.start_game
-              expect(game.today).to be == game.days.first
+              expect(game.today).to be == game.instance_variable_get(:@calendar).days.first
             end
           end
 
@@ -225,7 +218,8 @@ module SuperTues
       describe ".tomorrow!" do
         let(:game) { setup_game }
         it "advances today to tomorrow" do
-          expect(game.tomorrow!).to change(game.today).to(game.days[1])
+          days = game.instance_variable_get(:@calendar).days
+          expect { game.tomorrow! }.to change { game.today }.from(days[0]).to(days[1])
         end
       end
 

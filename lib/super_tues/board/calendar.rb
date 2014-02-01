@@ -8,6 +8,12 @@ module SuperTues
         self.days = days
       end
 
+      def days=(day_ary)
+        @days = day_ary
+        @today = 0
+        @days
+      end
+
       def today
         days[@today]
       end

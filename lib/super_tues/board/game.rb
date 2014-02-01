@@ -1,23 +1,30 @@
+require 'forwardable'
+
 module SuperTues
   module Board
 
     class Game
-      attr_reader :players, :states, :days, :rules, :current_player, :round, :turn, :today
+      extend Forwardable
+      attr_reader :players, :states, :rules, :current_player, :round, :turn
 
       def initialize()
         @players = []        
         @states = {}.with_indifferent_access
         @states_long_name = {}.with_indifferent_access
-        @days = []
+        @calendar = Calendar.new
         @candidate_deck = CandidateDeck.new
         @card_deck = CardDeck.new
         @news_deck = NewsDeck.new
         @bill_deck = BillDeck.new
         @rules = Rules.new(self)
         @front_runner = FrontRunner.new(self)
+
         init_states
         init_days
       end
+
+      # delegate today, today= and tomorrow! to calendar
+      def_delegators :@calendar, :today, :today=, :tomorrow!
 
       def front_runner
         @front_runner.is
@@ -82,10 +89,6 @@ module SuperTues
         add_home_state_picks
         pick_who_goes_first
         start_at_first_day
-      end
-
-      def tomorrow!
-        
       end
 
       # Assigns seats randomly or by assignment
@@ -155,7 +158,7 @@ module SuperTues
       end
 
       def start_at_first_day
-        @today = @days.first
+        today = 0
       end
 
       def init_states
@@ -167,9 +170,9 @@ module SuperTues
       end
 
       def init_days
-        SuperTues::Board.load_days.each do |day_hash|
-          days << Day.new(day_hash.with_indifferent_access)
-        end
+        @calendar.days = SuperTues::Board.load_days.collect do |day_hash|
+                           Day.new(day_hash.with_indifferent_access)
+                         end
       end
     end
 
