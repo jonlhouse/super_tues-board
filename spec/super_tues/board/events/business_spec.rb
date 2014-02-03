@@ -6,6 +6,10 @@ module SuperTues
 
       describe Business do
         specify { Business.should < Event }
+
+        describe "state transitions" do
+          
+        end
       end
     
     end

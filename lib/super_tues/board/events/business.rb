@@ -22,6 +22,23 @@ module SuperTues
           @update_mode = :take_turns
         end
 
+        # Define the state machine for Business day event.
+        #   
+        #  Notify-P1 => Interact-P1 => Update-P1 => 
+        #  Notify-P2 => Interact-P2 => ....
+        #  ...
+        #
+        # workflow do
+          # state :new do
+          # end
+          # state :notify do
+          # end
+          # state :interact do
+          # end
+          # state :update do
+          # end
+        # end
+
         # Build the notification and pass to super to yield to players
         def notify(players)
           super(players, Notices::BusinessNotice.new)

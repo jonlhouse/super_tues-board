@@ -1,3 +1,5 @@
+require 'workflow'
+
 module SuperTues
   module Board
     module Events
@@ -24,6 +26,7 @@ module SuperTues
       #     fired off after each turn (e.g. Business Day actions).
       #
       class Event
+        include Workflow
 
         MODES = [:take_turns, :all_at_once, :none]
 

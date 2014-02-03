@@ -10,6 +10,10 @@ module SuperTues
           specify { Rent.build(:rent, cost: 2).should be_a Rent }
         end
 
+        describe "includes Workflow" do
+          it { expect(Event).to respond_to(:workflow) }
+        end
+
         describe "completion" do
           subject { Event.new({}) }
           context "when new" do
