@@ -22,6 +22,10 @@ module SuperTues
       describe "#-" do
         specify { (Cash.new(2) - 1).should == Cash.new(1) }
       end
+
+      describe "to_json" do
+        specify { expect(Cash.new(5).to_json).to be == '5' }
+      end
     end
   end
 end

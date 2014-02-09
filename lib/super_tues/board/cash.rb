@@ -37,6 +37,10 @@ module SuperTues
         [other, to_i]
       end
 
+      def to_json
+        @amount.to_s
+      end
+
     private
 
       def cast(other)

@@ -35,6 +35,7 @@ module SuperTues
     # Your code goes here...
 
     @config = { 
+      default_max_players: 5,      
       candidates_per_player: 3,
       starting_cash: 20,
       starting_clout: 20,

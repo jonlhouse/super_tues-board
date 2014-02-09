@@ -42,6 +42,10 @@ module SuperTues
         "#{@amount} clout"
       end
 
+      def to_json
+        @amount.to_s
+      end
+
     private
 
       def cast(other)

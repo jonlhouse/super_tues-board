@@ -5,9 +5,22 @@ module SuperTues
 
     describe Game do
       let(:game) { Game.new }
+      let(:bob) { Player.new(name: 'bob') }
+      let(:tom) { Player.new(name: 'tom') }
+      let(:jim) { Player.new(name: 'jim') }
+
 
       context "new game" do
         specify { game.should be_a Game }
+
+        describe "specify max players" do
+          context "defaults" do
+            specify { expect(Game.new.max_players).to be == Board::config[:default_max_players] }
+          end
+          context "configurable" do
+            specify { expect(Game.new(max_players: 2).max_players).to be == 2 }
+          end          
+        end
 
         describe "candidates" do
           let(:candidates) { game.remaining_candidates }          
@@ -41,6 +54,20 @@ module SuperTues
         end
       end
 
+      describe "adding players" do
+        let(:two_player_game) { Game.new(max_players: 2) }
+
+        context "while not full" do
+          before(:each) { two_player_game.add_players bob }
+          specify { expect(two_player_game.full?).to be_false }          
+        end
+        context "when full" do
+          before(:each) { two_player_game.add_players bob, tom }
+          specify { expect(two_player_game.full?).to be_true }
+          specify { expect { two_player_game.add_players jim }.to raise_error }
+        end
+      end
+
       describe "seats" do
         describe "#seat_taken?(seat_num)" do
           it "looks into players' seats" do
@@ -70,11 +97,7 @@ module SuperTues
         end
       end
 
-      describe "setup" do
-        let(:bob) { Player.new(name: 'bob') }
-        let(:tom) { Player.new(name: 'tom') }
-        let(:jim) { Player.new(name: 'jim') }
-
+      describe "setup" do        
         describe "adding players" do          
           describe "adding players" do        
             it "add players and updates player's game" do

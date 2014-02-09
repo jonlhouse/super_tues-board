@@ -22,6 +22,10 @@ module SuperTues
         specify { (Clout.new(10) - 5).should == 5 }
         specify { (Clout.new(5) - 10).should == Clout.new(-5) }
       end
+
+      describe "to_json" do
+        specify { expect(Clout.new(5).to_json).to be == '5' }
+      end
     end
   end
 end

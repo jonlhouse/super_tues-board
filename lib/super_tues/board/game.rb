@@ -5,9 +5,10 @@ module SuperTues
 
     class Game
       extend Forwardable
-      attr_reader :players, :states, :rules, :current_player, :round, :turn
+      attr_reader :players, :states, :rules, :current_player, :round, :turn, :max_players
 
-      def initialize()
+      def initialize(max_players: Board.config[:default_max_players])
+        @max_players = max_players
         @players = []        
         @states = {}.with_indifferent_access
         @states_long_name = {}.with_indifferent_access
@@ -30,9 +31,19 @@ module SuperTues
       def_delegator :@front_runner, :is, :front_runner
 
       def add_players(*new_players)
-        new_players.each { |player| player.game = self }
-        players.concat new_players        
+        new_players.each { |player| add_player player }
         players
+      end
+
+      def add_player(new_player)
+        raise Player::TooManyPlayers if full?
+        new_player.game = self
+        players << new_player
+      end
+
+      # Returns whether the max number of player is reached
+      def full?
+        players.length >= max_players
       end
 
       # Returns the candidates in play

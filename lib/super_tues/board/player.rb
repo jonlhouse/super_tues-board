@@ -12,6 +12,7 @@ module SuperTues
       class NotAtGame < StandardError ; end
       class IllegalSeat < ArgumentError ; end
       class IllegalCandidate < ArgumentError ; end
+      class TooManyPlayers < StandardError ; end
 
       COLORS = %i(red green blue yellow black)
 
