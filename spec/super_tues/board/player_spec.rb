@@ -30,7 +30,7 @@ module SuperTues
       end
 
       describe "#pick_candidate" do        
-        [:a, :b, :c, :d].each { |sym| let(sym) { double } }
+        [:a, :b, :c, :d].each { |sym| let(sym) { Player.new(name: sym.to_s) } }
         before(:each) do
           player.candidates_dealt = [a, b, c]
           player.stub(:game) { double(candidate_available?: true) }

@@ -30,6 +30,8 @@ module SuperTues
       # delegate game.front_runner to @front_runner.is
       def_delegator :@front_runner, :is, :front_runner
 
+      def_delegators :@candidate_deck, :candidate
+
       def add_players(*new_players)
         new_players.each { |player| add_player player }
         players
@@ -39,6 +41,11 @@ module SuperTues
         raise Player::TooManyPlayers if full?
         new_player.game = self
         players << new_player
+      end
+
+      # Lookup player by name
+      def player(name)
+        players.detect { |p| p.name == name }
       end
 
       # Returns whether the max number of player is reached

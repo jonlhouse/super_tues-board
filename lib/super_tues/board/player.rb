@@ -25,6 +25,7 @@ module SuperTues
       end
 
       def candidate=(picked)
+        picked = candidates_dealt.find { |c| c.name == picked.to_s } unless picked.respond_to?(:name)
         raise IllegalCandidate, "#{picked} not in #{candidates_dealt}" unless candidate_dealt?(picked)
         raise IllegalCandidate, "#{picked} already picked" unless game.candidate_available?(picked)
         @candidate = picked
