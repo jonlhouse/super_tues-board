@@ -1,34 +1,35 @@
+
 module SuperTues
   module Board
     class Calendar
+      include Observer
 
       attr_accessor :days
 
       def initialize(days = [])
         self.days = days
+        @today = nil
       end
 
       def days=(day_ary)
         @days = day_ary
-        @today = 0
-        @days
       end
 
       def today
-        days[@today]
+        days.fetch(@today) rescue nil
       end
 
       def today=(day_or_index)
-        if day_or_index.respond_to? :to_int
-          @today = day_or_index.to_int
-        else
-          @today = days.index(day_or_index)          
-        end
-        today
+        @today = if day_or_index.respond_to? :to_int
+                  day_or_index.to_int
+                else
+                  days.index(day_or_index)          
+                end
       end
 
       def tomorrow!
-        @today = @today + 1
+        @today = (@today.nil? ? 0 : @today + 1)
+        notify_observers
         today
       end
 

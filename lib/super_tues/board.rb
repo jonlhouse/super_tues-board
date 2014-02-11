@@ -1,4 +1,5 @@
 require "super_tues/board/version"
+require "super_tues/board/observer"
 require "super_tues/board/game"
 require "super_tues/board/player"
 require "super_tues/board/candidate"

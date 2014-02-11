@@ -28,7 +28,7 @@ module SuperTues
       specify { game.candidates_picked?.should be }
 
       # start the game
-      before(:each) { game.init_game }
+      before(:each) { game.reset }
 
       # colors are assigned to players
       specify { game.players.each { |player| player.color.should be_in Player::COLORS } }

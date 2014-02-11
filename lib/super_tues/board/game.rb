@@ -32,6 +32,9 @@ module SuperTues
 
       def_delegators :@candidate_deck, :candidate
 
+      ########################################
+      # Player Methods
+      #
       def add_players(*new_players)
         new_players.each { |player| add_player player }
         players
@@ -52,6 +55,33 @@ module SuperTues
       def full?
         players.length >= max_players
       end
+
+      # Assigns seats randomly or by assignment
+      def seat_players(assigned_seating = false)
+        seating = if !assigned_seating
+                    random_seats = (0...players.length).to_a.shuffle
+                    players.each_with_object({}) { |player,hash| hash[random_seats.shift] = player }
+                  else
+                    assigned_seating
+                  end
+        seating.each { |seat, player| player.seat = seat }
+        seats
+      end
+
+      # Returns whether seat *num* is already assigned for this game.
+      def seat_taken?(num)
+        players.map(&:seat).include?(num)
+      end
+
+      # Returns a hash of seats => players
+      def seats
+        players.each_with_object({}) { |player, hash| hash[player.seat] = player }
+      end
+
+
+      ########################################
+      # Candidate Methods
+      #
 
       # Returns the candidates in play
       def candidates
@@ -82,6 +112,9 @@ module SuperTues
         @card_deck.pop(n)   # TODO: out of cards reshuffle
       end
 
+      ########################################
+      # State, State-bins Methods
+      #
       def states
         @state_vals ||= @states.values
       end
@@ -94,9 +127,13 @@ module SuperTues
         end
       end
 
-      # Set the initial start of the game.
+      ########################################
+      # Game State
       #
-      def init_game
+
+      # Reset (init) the game
+      #
+      def reset
         @round = 0
         @turn = 0 
         assign_player_colors
@@ -112,20 +149,10 @@ module SuperTues
         players.all? { |player| player.ready? }
       end
 
-      def start_game        
+      def start
+        tomorrow!
       end
-
-      # Assigns seats randomly or by assignment
-      def seat_players(assigned_seating = false)
-        seating = if !assigned_seating
-                    random_seats = (0...players.length).to_a.shuffle
-                    players.each_with_object({}) { |player,hash| hash[random_seats.shift] = player }
-                  else
-                    assigned_seating
-                  end
-        seating.each { |seat, player| player.seat = seat }
-        seats
-      end
+     
 
       def to_s
         "<Game State: #{players.count} players, turn: #{@turn}>"
@@ -133,16 +160,6 @@ module SuperTues
 
       def inspect
         to_s
-      end
-
-      # Returns whether seat *num* is already assigned for this game.
-      def seat_taken?(num)
-        players.map(&:seat).include?(num)
-      end
-
-      # Returns a hash of seats => players
-      def seats
-        players.each_with_object({}) { |player, hash| hash[player.seat] = player }
       end
 
       # Rules delegators
