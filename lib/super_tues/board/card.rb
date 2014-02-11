@@ -24,6 +24,10 @@ module SuperTues
         @showing = true
       end
 
+      def to_h
+        { title: title, description: description, showing: up? }
+      end
+
     end
 
   end

@@ -23,6 +23,11 @@ module SuperTues
       specify { card.up?.should_not be }
       specify { card.down?.should be }
       specify { expect { card.show }.to change { card.up? } }
+
+      describe "#to_h" do
+        let(:attr_hash) { { title: 'Visit Sunny Florida', description: 'Play 3 picks in Texas\'s bin.', showing: false } }
+        specify { expect(card.to_h).to eq(attr_hash) }
+      end
     end
 
   end

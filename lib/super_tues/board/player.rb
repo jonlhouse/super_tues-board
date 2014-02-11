@@ -14,7 +14,7 @@ module SuperTues
       class IllegalCandidate < ArgumentError ; end
       class TooManyPlayers < StandardError ; end
 
-      COLORS = %i(red green blue yellow black)
+      COLORS = %i(red green blue yellow magenta cyan)
 
       attr_accessor :name, :color, :game, :seat, :candidates_dealt, :cash, :clout, :cards
       attr_reader :candidate
