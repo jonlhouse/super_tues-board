@@ -22,6 +22,7 @@ module SuperTues
       def initialize(attrs)
         self.name = ensure_name(attrs[:name])
         self.candidates_dealt = []
+        @ready = false
       end
 
       def candidate=(picked)
@@ -42,6 +43,18 @@ module SuperTues
         self.cash = Cash.new SuperTues::Board.config[:starting_cash]
         self.clout = Clout.new SuperTues::Board.config[:starting_clout]
         self.cards = game.deal_cards SuperTues::Board.config[:starting_cards]
+      end
+
+      def is_ready
+        @ready = true
+      end
+
+      def is_not_ready
+        @ready = false
+      end
+
+      def ready?
+        !!@ready
       end
 
       def to_sym

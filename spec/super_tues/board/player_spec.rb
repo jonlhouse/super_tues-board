@@ -17,6 +17,15 @@ module SuperTues
         end
       end
 
+      describe "#ready" do
+        it "false by default" do
+          expect(Player.new(name: 'a').ready?).to be_false
+        end
+        it "can be set" do
+          expect(Player.new(name: 'a').tap { |p| p.is_ready }.ready?).to be_true
+        end
+      end
+
       let(:game) { Game.new }
       let(:player) { Player.new(name: 'john') }
 

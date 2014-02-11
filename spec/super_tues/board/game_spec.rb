@@ -176,17 +176,17 @@ module SuperTues
             end
           end
 
-          describe "#start_game" do
+          describe "#init_game" do
             before(:each) do
               game.deal_candidates
               game.players.each { |player| player.candidate = player.candidates_dealt.first }
             end
             it "assigns colors to players" do
-              game.start_game
+              game.init_game
               game.players.each { |player| expect(player.to_sym).to be_in(Player::COLORS) }
             end
             it "seeds players funds" do
-              game.start_game
+              game.init_game
               game.players.each do |player|
                 expect(player.cash).to be > 0
                 expect(player.clout).to be > 0
@@ -194,32 +194,49 @@ module SuperTues
               end
             end
             it "seats players" do
-              game.start_game
+              game.init_game
               game.players.each { |player| expect(player.seat).to be_in(0...game.players.count) }
               expect(game.players.map(&:seat).uniq.count).to be == game.players.count
             end
             it "reset state bins" do
               expect(game).to receive(:reset_state_bins)
-              game.start_game              
+              game.init_game              
             end
             it "adds home state bins" do
-              game.start_game
+              game.init_game
               game.players.each do |player|
                 game.state(player.candidate.state).picks[player].should be > 0
               end
             end
             it "randomly picks a front runner" do
-              game.start_game
+              game.init_game
               expect(game.front_runner).to be_in(game.players)
             end
             it "sets today to the first calendar day" do
-              game.start_game
+              game.init_game
               expect(game.today).to be == game.instance_variable_get(:@calendar).days.first
             end
           end
 
         end  # once players added
       end   # setup
+
+      describe "#ready_to_start?" do
+        let(:game) { setup_game }
+        it "false by default" do
+          expect(game.ready_to_start?).to be_false
+        end
+        it "true when all players are ready" do
+          game.players.each { |p| p.is_ready }
+          game.players.first.is_not_ready
+          expect(game.ready_to_start?).to be_false
+        end
+        it "false when any player is not ready" do
+          game.players.each { |p| p.is_ready }
+          game.players.first.is_not_ready
+          expect(game.ready_to_start?).to be_false
+        end
+      end
 
       describe "rules" do
         describe "querying rules" do          

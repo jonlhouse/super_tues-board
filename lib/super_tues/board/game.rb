@@ -96,7 +96,7 @@ module SuperTues
 
       # Set the initial start of the game.
       #
-      def start_game
+      def init_game
         @round = 0
         @turn = 0 
         assign_player_colors
@@ -106,6 +106,13 @@ module SuperTues
         add_home_state_picks
         pick_who_goes_first
         start_at_first_day
+      end
+
+      def ready_to_start?
+        players.all? { |player| player.ready? }
+      end
+
+      def start_game        
       end
 
       # Assigns seats randomly or by assignment
