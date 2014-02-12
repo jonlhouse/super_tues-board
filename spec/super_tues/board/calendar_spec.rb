@@ -35,7 +35,7 @@ module SuperTues
       describe "is observable" do
         it "notifies when days change" do
           called = false
-          calendar.add_observer do
+          calendar.add_observer do |today|
             called = true
           end
           calendar.tomorrow!

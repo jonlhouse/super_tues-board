@@ -29,7 +29,7 @@ module SuperTues
 
       def tomorrow!
         @today = (@today.nil? ? 0 : @today + 1)
-        notify_observers
+        notify_observers today
         today
       end
 

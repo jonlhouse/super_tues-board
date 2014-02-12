@@ -3,6 +3,10 @@ require 'forwardable'
 module SuperTues
   module Board
 
+    # Top-level SuperTues Game representation
+    #
+    # Game encapsulates the players, the board, the rules, the score, state-bins etc.
+    #
     class Game
       extend Forwardable
       attr_reader :players, :states, :rules, :current_player, :round, :turn, :max_players
@@ -124,6 +128,16 @@ module SuperTues
           @states[name.to_sym.downcase]
         else
           @states_long_name[name.downcase]
+        end
+      end
+
+      ########################################
+      # Observers
+      #
+      def observe(what, &block)
+        case what
+        when :calendar then @calendar.add_observer(&block)
+        else
         end
       end
 

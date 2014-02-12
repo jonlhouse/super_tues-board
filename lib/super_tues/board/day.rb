@@ -7,12 +7,19 @@ module SuperTues
       def initialize(attrs)
         # Note: throws ArgumentError on invalid dates
         @date = attrs[:date].is_a?(Date) ? attrs[:date] : Date.parse(attrs[:date]) 
-        @events = attrs[:events].empty? ? {} : build_events(attrs[:events])
+        @events = attrs[:events].empty? ? [] : build_events(attrs[:events])
       end
 
       def to_s
         # Monday, January 3 2014
         @date.strftime "%A, %B %-e %Y"
+      end
+
+      def to_h
+        {
+          date: to_s,
+          events: @events.each_with_object({}) { |event,obj| obj[event.type] = event.to_s }
+        }
       end
 
     private

@@ -26,8 +26,8 @@ module SuperTues
 
     private
 
-      def notify_observers
-        observers.values.each { |proc| proc.call }
+      def notify_observers(*args)
+        observers.values.each { |proc| proc.call *args }
       end
     end
   end
